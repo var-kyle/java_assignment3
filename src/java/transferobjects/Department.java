@@ -16,8 +16,8 @@ public class Department {
     public Department() {}
     
     public Department (String name, String number){
-        this.name = name;
-        this.departmentNumber = number;
+        setName(name);
+        setNumber(number);
     }
     
     public String getName() { return name; }

@@ -19,10 +19,10 @@ public class DepartmentManager {
     public DepartmentManager() {}
     
     public DepartmentManager(int employeeNumber, String departmentNumber, Date fromDate, Date toDate){
-        this.employeeNumber = employeeNumber;
-        this.departmentNumber = departmentNumber;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        setEmployeeNumber(employeeNumber);
+        setDepartmentNumber(departmentNumber);
+        setFromDate(fromDate);
+        setToDate(toDate);
     }
     
     public int getEmployeeNumber() { return employeeNumber; }

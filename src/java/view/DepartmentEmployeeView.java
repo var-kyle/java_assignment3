@@ -13,15 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.DepartmentLogic;
-import transferobjects.Department;
+import logic.DepartmentEmployeeLogic;
+import transferobjects.DepartmentEmployee;
 
 /**
  *
- * @author kyle
+ * @author kylem
  */
-@WebServlet(name = "DepartmentView", urlPatterns = {"/DepartmentView"})
-public class DepartmentView extends HttpServlet {
+@WebServlet(name = "DepartmentEmployeeView", urlPatterns = {"/DepartmentEmployeeView"})
+public class DepartmentEmployeeView extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,24 +35,26 @@ public class DepartmentView extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {            
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DepartmentView</title>");            
+            out.println("<title>Servlet DepartmentEmployeeView</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DepartmentView at " + request.getContextPath() + "</h1>");
-            DepartmentLogic logic = new DepartmentLogic();
-            List<Department> departments = logic.getAllDepartments();
+            out.println("<h1>Servlet DepartmentEmployeeView at " + request.getContextPath() + "</h1>");
+            DepartmentEmployeeLogic logic = new DepartmentEmployeeLogic();
+            List<DepartmentEmployee> deptEmps = logic.getAllDepartmentEmployees();
             out.println("<table border=\"1\">");
             out.println("<tr>");
+            out.println("<td>Employee Number</td>");
             out.println("<td>Department Number</td>");
-            out.println("<td>Department Name</td>");
+            out.println("<td>From Date</td>");
+            out.println("<td>To Date</td>");
             out.println("</tr>");
-            for(Department department : departments){
-                out.printf("<tr><td>%s</td><td>%s</td></tr>", department.getNumber(), department.getName());
+            for(DepartmentEmployee deptEmp : deptEmps){
+                out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", deptEmp.getEmployeeNumber(), deptEmp.getDepartmentNumber(), deptEmp.getFromDate(), deptEmp.getToDate());
             }
             out.println("</table>");
             out.println("</body>");

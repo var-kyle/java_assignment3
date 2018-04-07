@@ -5,15 +5,12 @@
  */
 package dataaccess;
 
-import java.util.List;
+import transferobjects.DepartmentManager;
 
 /**
  *
- * @author kyle
+ * @author kylem
  */
-public interface BasicDAO<T> {
-    List<T> getAll();
-    T getById(int id);
-    T getById(String id);
-    void insert(T item);
+public interface DepartmentManagerDAO extends BasicDAO<DepartmentManager> {
+    
 }

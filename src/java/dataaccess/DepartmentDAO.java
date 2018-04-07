@@ -5,10 +5,12 @@
  */
 package dataaccess;
 
+import transferobjects.Department;
+
 /**
  *
  * @author kyle
  */
-public interface DepartmentDAO extends BasicDAO{
+public interface DepartmentDAO extends BasicDAO<Department> {
     
 }

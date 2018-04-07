@@ -18,10 +18,10 @@ public class Salary {
     public Salary() {}
     
     public Salary(int employeeNumber, int salary, Date fromDate, Date toDate) {
-        this.employeeNumber = employeeNumber;
-        this.salary = salary;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        setEmployeeNumber(employeeNumber);
+        setSalary(salary);
+        setFromDate(fromDate);
+        setToDate(toDate);
     }    
     
     public int getEmployeeNumber() { return employeeNumber; }

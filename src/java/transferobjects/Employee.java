@@ -19,12 +19,12 @@ public class Employee {
     public Employee() {}
     
     public Employee(int employeeNumber, Date birthDate, Date hireDate, String firstName, String lastName, String gender){
-        this.employeeNumber = employeeNumber;
-        this.birthDate = birthDate;
-        this.hireDate = hireDate;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
+        setEmployeeNumber(employeeNumber);
+        setBirthDate(birthDate);
+        setHireDate(hireDate);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setGender(gender);
     }
     
     public int getEmployeeNumber() { return employeeNumber; }

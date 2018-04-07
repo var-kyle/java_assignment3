@@ -24,4 +24,13 @@ public class DepartmentLogic {
     public List<Department> getAllDepartments() {
         return departmentDAO.getAll();
     }
+    
+    public Department getDepartmentById(String deptNo) {
+        return departmentDAO.getById(deptNo);
+    }
+    
+    public void insertDepartment(Department dept) {
+        //TODO: some validation stuff first
+        departmentDAO.insert(dept);
+    }
 }

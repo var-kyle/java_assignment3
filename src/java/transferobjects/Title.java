@@ -19,10 +19,10 @@ public class Title {
     public Title() {}
     
     public Title(int employeeNumber, String title, Date fromDate, Date toDate) {
-        this.employeeNumber = employeeNumber;
-        this.title = title;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        setEmployeeNumber(employeeNumber);
+        setTitle(title);
+        setFromDate(fromDate);
+        setToDate(toDate);
     }    
     
     public int getEmployeeNumber() { return employeeNumber; }
