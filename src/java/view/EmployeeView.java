@@ -37,24 +37,19 @@ public class EmployeeView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EmployeeView</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EmployeeView at " + request.getContextPath() + "</h1>");
-            out.println("<h1>Servlet DepartmentManagerView at " + request.getContextPath() + "</h1>");
+            out.print(WebHelper.htmlStart());
+            out.print(WebHelper.htmlHeader("Employees"));
+            out.print(WebHelper.htmlBodyStart("Employees"));
             EmployeeLogic logic = new EmployeeLogic();
             List<Employee> employees = logic.getAllEmployees();
-            out.println("<table border=\"1\">");
+            out.println("<table class=\"table\">");
             out.println("<tr>");
-            out.println("<td>Employee Number</td>");
-            out.println("<td>Birth Date</td>");
-            out.println("<td>First Name</td>");
-            out.println("<td>Last Name</td>");
-            out.println("<td>Gender</td>");
-            out.println("<td>Hire Date</td>");
+            out.println("<th>Employee Number</th>");
+            out.println("<th>Birth Date</th>");
+            out.println("<th>First Name</th>");
+            out.println("<th>Last Name</th>");
+            out.println("<th>Gender</th>");
+            out.println("<th>Hire Date</th>");
             out.println("</tr>");
             for(Employee employee : employees){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
@@ -66,8 +61,8 @@ public class EmployeeView extends HttpServlet {
                         employee.getHireDate());
             }
             out.println("</table>");
-            out.println("</body>");
-            out.println("</html>");
+            out.print(WebHelper.htmlBodyEnd());
+            out.print(WebHelper.htmlEnd());
         }
     }
 

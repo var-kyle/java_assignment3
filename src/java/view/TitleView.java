@@ -37,21 +37,17 @@ public class TitleView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TitleView</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TitleView at " + request.getContextPath() + "</h1>");
+            out.print(WebHelper.htmlStart());
+            out.print(WebHelper.htmlHeader("Titles"));
+            out.print(WebHelper.htmlBodyStart("Titles"));
             TitleLogic logic = new TitleLogic();
             List<Title> salaries = logic.getAllTitles();
-            out.println("<table border=\"1\">");
+            out.println("<table class=\"table\">");
             out.println("<tr>");
-            out.println("<td>Employee Number</td>");
-            out.println("<td>Title</td>");
-            out.println("<td>From Date</td>");
-            out.println("<td>To Date</td>");
+            out.println("<th>Employee Number</th>");
+            out.println("<th>Title</th>");
+            out.println("<th>From Date</th>");
+            out.println("<th>To Date</th>");
             out.println("</tr>");
             for(Title salary : salaries){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
@@ -61,8 +57,8 @@ public class TitleView extends HttpServlet {
                         salary.getToDate());
             }
             out.println("</table>");
-            out.println("</body>");
-            out.println("</html>");
+            out.print(WebHelper.htmlBodyEnd());
+            out.print(WebHelper.htmlEnd());
         }
     }
 

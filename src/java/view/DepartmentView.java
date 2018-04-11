@@ -37,26 +37,22 @@ public class DepartmentView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {            
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DepartmentView</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DepartmentView at " + request.getContextPath() + "</h1>");
+            out.print(WebHelper.htmlStart());
+            out.print(WebHelper.htmlHeader("Departments"));
+            out.print(WebHelper.htmlBodyStart("Departments"));
             DepartmentLogic logic = new DepartmentLogic();
             List<Department> departments = logic.getAllDepartments();
-            out.println("<table border=\"1\">");
+            out.println("<table class=\"table\">");
             out.println("<tr>");
-            out.println("<td>Department Number</td>");
-            out.println("<td>Department Name</td>");
+            out.println("<th>Department Number</th>");
+            out.println("<th>Department Name</th>");
             out.println("</tr>");
             for(Department department : departments){
                 out.printf("<tr><td>%s</td><td>%s</td></tr>", department.getNumber(), department.getName());
             }
             out.println("</table>");
-            out.println("</body>");
-            out.println("</html>");
+            out.print(WebHelper.htmlBodyEnd());
+            out.print(WebHelper.htmlEnd());
         }
     }
 

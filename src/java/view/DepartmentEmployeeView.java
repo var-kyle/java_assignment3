@@ -37,28 +37,24 @@ public class DepartmentEmployeeView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DepartmentEmployeeView</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DepartmentEmployeeView at " + request.getContextPath() + "</h1>");
+            out.print(WebHelper.htmlStart());
+            out.print(WebHelper.htmlHeader("Department Employees"));
+            out.print(WebHelper.htmlBodyStart("Department Employees"));
             DepartmentEmployeeLogic logic = new DepartmentEmployeeLogic();
             List<DepartmentEmployee> deptEmps = logic.getAllDepartmentEmployees();
-            out.println("<table border=\"1\">");
+            out.println("<table class=\"table\">");
             out.println("<tr>");
-            out.println("<td>Employee Number</td>");
-            out.println("<td>Department Number</td>");
-            out.println("<td>From Date</td>");
-            out.println("<td>To Date</td>");
+            out.println("<th>Employee Number</th>");
+            out.println("<th>Department Number</th>");
+            out.println("<th>From Date</th>");
+            out.println("<th>To Date</th>");
             out.println("</tr>");
             for(DepartmentEmployee deptEmp : deptEmps){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", deptEmp.getEmployeeNumber(), deptEmp.getDepartmentNumber(), deptEmp.getFromDate(), deptEmp.getToDate());
             }
             out.println("</table>");
-            out.println("</body>");
-            out.println("</html>");
+            out.print(WebHelper.htmlBodyEnd());
+            out.print(WebHelper.htmlEnd());
         }
     }
 
