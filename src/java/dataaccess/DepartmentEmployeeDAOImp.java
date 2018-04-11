@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.DepartmentEmployee;
+import transferobjects.factory.DTOFactoryCreator;
 
 /**
  *
  * @author kylem
  */
 public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
-    private static final String GET_ALL_DEPARTMENT_EMPLOYEES = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp ORDER BY emp_no LIMIT 20";
+    private static final String GET_ALL_DEPARTMENT_EMPLOYEES = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp ORDER BY emp_no LIMIT " + ROW_LIMIT;
     
     @Override
     public List<DepartmentEmployee> getAll() {
@@ -35,15 +36,7 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement( GET_ALL_DEPARTMENT_EMPLOYEES);
             rs = pstmt.executeQuery();
-            deptEmps = new ArrayList<>(100);
-            while( rs.next()){
-                deptEmp = new DepartmentEmployee();
-                deptEmp.setEmployeeNumber(rs.getInt("emp_no"));
-                deptEmp.setDepartmentNumber(rs.getString("dept_no"));
-                deptEmp.setFromDate(rs.getDate("from_date"));
-                deptEmp.setToDate(rs.getDate("to_date"));
-                deptEmps.add(deptEmp);
-            }
+            deptEmps = DTOFactoryCreator.createBuilder(DepartmentEmployee.class).createListFromResultSet(rs);
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

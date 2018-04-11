@@ -6,6 +6,7 @@
 package transferobjects;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -16,6 +17,35 @@ public class Salary {
     private Date fromDate, toDate;
     
     public Salary() {}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + this.employeeNumber;
+        hash = 13 * hash + Objects.hashCode(this.fromDate);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Salary other = (Salary) obj;
+        if (this.employeeNumber != other.employeeNumber) {
+            return false;
+        }
+        if (!Objects.equals(this.fromDate, other.fromDate)) {
+            return false;
+        }
+        return true;
+    }
     
     public Salary(int employeeNumber, int salary, Date fromDate, Date toDate) {
         setEmployeeNumber(employeeNumber);

@@ -12,6 +12,7 @@ import java.util.List;
  * @author kyle
  */
 public interface BasicDAO<T> {
+    final int ROW_LIMIT = 100;
     List<T> getAll();
     T getById(int id);
     T getById(String id);

@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Employee;
+import transferobjects.factory.DTOFactoryCreator;
 
 /**
  *
  * @author kylem
  */
 public class EmployeeDAOImp implements EmployeeDAO {
-    private static final String GET_ALL_EMPLOYEES = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees ORDER BY emp_no LIMIT 20";
+    private static final String GET_ALL_EMPLOYEES = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees ORDER BY emp_no LIMIT " + ROW_LIMIT;
 
     @Override
     public List<Employee> getAll() {
@@ -35,17 +36,7 @@ public class EmployeeDAOImp implements EmployeeDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement( GET_ALL_EMPLOYEES);
             rs = pstmt.executeQuery();
-            employees = new ArrayList<>(100);
-            while( rs.next()){
-                employee = new Employee();
-                employee.setEmployeeNumber(rs.getInt("emp_no"));
-                employee.setBirthDate(rs.getDate("birth_date"));
-                employee.setFirstName(rs.getString("first_name"));
-                employee.setLastName(rs.getString("last_name"));
-                employee.setGender(rs.getString("gender"));
-                employee.setHireDate(rs.getDate("hire_date"));
-                employees.add(employee);
-            }
+            employees = DTOFactoryCreator.createBuilder(Employee.class).createListFromResultSet(rs);
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

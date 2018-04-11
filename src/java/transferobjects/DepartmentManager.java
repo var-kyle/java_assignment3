@@ -6,6 +6,7 @@
 package transferobjects;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -17,6 +18,35 @@ public class DepartmentManager {
     private Date fromDate, toDate;
     
     public DepartmentManager() {}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + this.employeeNumber;
+        hash = 61 * hash + Objects.hashCode(this.departmentNumber);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DepartmentManager other = (DepartmentManager) obj;
+        if (this.employeeNumber != other.employeeNumber) {
+            return false;
+        }
+        if (!Objects.equals(this.departmentNumber, other.departmentNumber)) {
+            return false;
+        }
+        return true;
+    }
     
     public DepartmentManager(int employeeNumber, String departmentNumber, Date fromDate, Date toDate){
         setEmployeeNumber(employeeNumber);

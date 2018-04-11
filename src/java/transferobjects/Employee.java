@@ -17,6 +17,31 @@ public class Employee {
     private String firstName, lastName, gender;
     
     public Employee() {}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + this.employeeNumber;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Employee other = (Employee) obj;
+        if (this.employeeNumber != other.employeeNumber) {
+            return false;
+        }
+        return true;
+    }
     
     public Employee(int employeeNumber, Date birthDate, Date hireDate, String firstName, String lastName, String gender){
         setEmployeeNumber(employeeNumber);
@@ -40,4 +65,6 @@ public class Employee {
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setGender(String gender) { this.gender = gender; }
+
+    
 }

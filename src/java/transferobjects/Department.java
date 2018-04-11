@@ -5,6 +5,8 @@
  */
 package transferobjects;
 
+import java.util.Objects;
+
 /**
  *
  * @author kyle
@@ -14,6 +16,31 @@ public class Department {
     private String departmentNumber;
     
     public Department() {}
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.departmentNumber);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Department other = (Department) obj;
+        if (!Objects.equals(this.departmentNumber, other.departmentNumber)) {
+            return false;
+        }
+        return true;
+    }
     
     public Department (String name, String number){
         setName(name);

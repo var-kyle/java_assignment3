@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.DepartmentManager;
+import transferobjects.factory.DTOFactoryCreator;
 
 /**
  *
  * @author kylem
  */
 public class DepartmentManagerDAOImp implements DepartmentManagerDAO {
-    private static final String GET_ALL_DEPARTMENT_MANAGERS = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager ORDER BY emp_no LIMIT 20";
+    private static final String GET_ALL_DEPARTMENT_MANAGERS = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager ORDER BY emp_no LIMIT " + ROW_LIMIT;
 
     @Override
     public List<DepartmentManager> getAll() {
@@ -35,15 +36,7 @@ public class DepartmentManagerDAOImp implements DepartmentManagerDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement( GET_ALL_DEPARTMENT_MANAGERS);
             rs = pstmt.executeQuery();
-            deptManagers = new ArrayList<>(100);
-            while( rs.next()){
-                deptManager = new DepartmentManager();
-                deptManager.setEmployeeNumber(rs.getInt("emp_no"));
-                deptManager.setDepartmentNumber(rs.getString("dept_no"));
-                deptManager.setFromDate(rs.getDate("from_date"));
-                deptManager.setToDate(rs.getDate("to_date"));
-                deptManagers.add(deptManager);
-            }
+            deptManagers = DTOFactoryCreator.createBuilder(DepartmentManager.class).createListFromResultSet(rs);
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

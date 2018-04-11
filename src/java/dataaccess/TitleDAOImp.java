@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Title;
+import transferobjects.factory.DTOFactoryCreator;
 
 /**
  *
  * @author kylem
  */
 public class TitleDAOImp implements TitleDAO {
-    private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT 20";
+    private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT " + ROW_LIMIT;
 
     @Override
     public List<Title> getAll() {
@@ -35,15 +36,7 @@ public class TitleDAOImp implements TitleDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement( GET_ALL_TITLES);
             rs = pstmt.executeQuery();
-            titles = new ArrayList<>(100);
-            while( rs.next()){
-                title = new Title();
-                title.setEmployeeNumber(rs.getInt("emp_no"));
-                title.setTitle(rs.getString("title"));
-                title.setFromDate(rs.getDate("from_date"));
-                title.setToDate(rs.getDate("to_date"));
-                titles.add(title);
-            }
+            titles = DTOFactoryCreator.createBuilder(Title.class).createListFromResultSet(rs);
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

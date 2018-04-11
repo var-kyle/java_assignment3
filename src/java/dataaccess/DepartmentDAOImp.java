@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Department;
+import transferobjects.factory.DTOFactoryCreator;
 
 /**
  *
  * @author kyle
  */
 public class DepartmentDAOImp implements DepartmentDAO {
-    private static final String GET_ALL_DEPARTMENTS = "SELECT dept_no, dept_name FROM Departments ORDER BY dept_no LIMIT 20";
+    private static final String GET_ALL_DEPARTMENTS = "SELECT dept_no, dept_name FROM Departments ORDER BY dept_no LIMIT " + ROW_LIMIT;
     private static final String GET_DEPARTMENT_BY_ID = "SELECT dept_no, dept_name FROM Departments WHERE dept_no = '?'";
     private static final String INSERT_DEPARTMENT = "INSERT INTO Departments(dept_no, dept_name) VALUES(?,?)";
     
@@ -37,13 +38,7 @@ public class DepartmentDAOImp implements DepartmentDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement( GET_ALL_DEPARTMENTS);
             rs = pstmt.executeQuery();
-            departments = new ArrayList<>(100);
-            while( rs.next()){
-                department = new Department();
-                department.setNumber(rs.getString("dept_no"));
-                department.setName( rs.getString("dept_name"));
-                departments.add(department);
-            }
+            departments = DTOFactoryCreator.createBuilder(Department.class).createListFromResultSet(rs);
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

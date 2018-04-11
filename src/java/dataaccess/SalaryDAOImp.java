@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Salary;
+import transferobjects.factory.DTOFactoryCreator;
 
 /**
  *
  * @author kylem
  */
 public class SalaryDAOImp implements SalaryDAO {
-    private static final String GET_ALL_SALARIES = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no LIMIT 20";
+    private static final String GET_ALL_SALARIES = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no LIMIT " + ROW_LIMIT;
 
     @Override
     public List<Salary> getAll() {
@@ -36,14 +37,7 @@ public class SalaryDAOImp implements SalaryDAO {
             pstmt = con.prepareStatement( GET_ALL_SALARIES);
             rs = pstmt.executeQuery();
             salaries = new ArrayList<>(100);
-            while( rs.next()){
-                salary = new Salary();
-                salary.setEmployeeNumber(rs.getInt("emp_no"));
-                salary.setSalary(rs.getInt("salary"));
-                salary.setFromDate(rs.getDate("from_date"));
-                salary.setToDate(rs.getDate("to_date"));
-                salaries.add(salary);
-            }
+            salaries = DTOFactoryCreator.createBuilder(Salary.class).createListFromResultSet(rs);
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
