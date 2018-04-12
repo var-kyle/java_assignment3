@@ -81,6 +81,18 @@ public class WebHelper {
                 .toString();
     }
     
+    public static String getSaveResetButtons() {
+        StringBuilder sb = new StringBuilder();
+
+        return sb.append("<div class=\"row\">")
+                .append("<div class=\"col-sm-12\">")
+                .append("<input class=\"btn btn-primary mr-3\" type=\"submit\" value=\"Save\"/>")
+                .append("<input class=\"btn btn-default\" type=\"reset\" value=\"Reset\"/>")
+                .append("</div>")
+                .append("</div>")
+                .toString();
+    }
+    
     private static String getNavbar(){
         StringBuilder sb = new StringBuilder();
    
@@ -112,10 +124,10 @@ public class WebHelper {
                 .append("</div>")
                 .append("</li>")
                 .append("</ul>")
-                .append("<form class=\"form-inline my-2 my-lg-0\">")
-                .append("<input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"I don't do anything!\" aria-label=\"Search\">")
-                .append("<button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>")
-                .append("</form>")
+                //.append("<form class=\"form-inline my-2 my-lg-0\">")
+                //.append("<input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"I don't do anything!\" aria-label=\"Search\">")
+                //.append("<button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>")
+                //.append("</form>")
                 .append("</div>")
                 .append("</nav>")
                 .toString();

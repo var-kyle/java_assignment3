@@ -23,7 +23,7 @@ import transferobjects.factory.Factory;
  */
 public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
     private static final String GET_ALL_DEPARTMENT_EMPLOYEES = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp ORDER BY emp_no LIMIT " + ROW_LIMIT;
-    private static final String GET_BY_ID = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp WHERE emp_no = ? AND dept_no = ?";
+    private static final String GET_BY_ID = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp WHERE emp_no = ?";
     private static final String INSERT_DEPARTMENT_EMPLOYEE = "INSERT INTO dept_emp(emp_no, dept_no, from_date, to_date) VALUES(?,?,?,?)";
     private static final String UPDATE_DEPARTMENT_EMPLOYEE = "UPDATE dept_emp SET from_date = ?, to_date = ? WHERE emp_no = ? AND dept_no = ?";
     
@@ -74,7 +74,7 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
     }
 
     @Override
-    public DepartmentEmployee getById(int empNo, String deptNo) {
+    public DepartmentEmployee getById(int empNo) {
         @SuppressWarnings("unchecked")
         DepartmentEmployee deptEmp = new DepartmentEmployee();
         Connection con = null;
@@ -84,7 +84,6 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(GET_BY_ID);
             pstmt.setInt(1, empNo);
-            pstmt.setString(2, deptNo);
             rs = pstmt.executeQuery();
             if (rs.next())
                 deptEmp = factory.createFromResultSet(rs);

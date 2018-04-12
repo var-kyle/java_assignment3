@@ -23,6 +23,7 @@ public class EmployeeFactory extends AbstractFactory<Employee> {
     public Employee createFromResultSet(ResultSet rs) {
         try {
             EmployeeBuilder builder = new EmployeeBuilder();
+            
             return builder
                     .setEmployeeNumber(rs)
                     .setFirstName(rs)

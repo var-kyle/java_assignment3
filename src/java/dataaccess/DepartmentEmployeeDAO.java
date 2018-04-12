@@ -12,5 +12,5 @@ import transferobjects.DepartmentEmployee;
  * @author kylem
  */
 public interface DepartmentEmployeeDAO extends BasicDAO<DepartmentEmployee> {
-    DepartmentEmployee getById(int empNo, String deptNo);
+    DepartmentEmployee getById(int empNo);
 }

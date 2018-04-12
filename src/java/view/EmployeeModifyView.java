@@ -7,14 +7,17 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.EmployeeLogic;
+import logic.AddEditEmployeeLogic;
+import transferobjects.Department;
+import transferobjects.DepartmentEmployee;
 import transferobjects.Employee;
+import transferobjects.Salary;
+import transferobjects.Title;
 
 /**
  *
@@ -40,14 +43,167 @@ public class EmployeeModifyView extends HttpServlet {
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Employees"));
             out.print(WebHelper.htmlBodyStart("Employee modification", "You can bend the will of your employees here."));
-            EmployeeLogic logic = new EmployeeLogic();
-            Employee emp = logic.getEmployeeById(Integer.parseInt(request.getParameter("id")));
-            out.println(emp.getEmployeeNumber());
-            out.println(emp.getFirstName());
-            out.println(emp.getLastName());
-            out.println(emp.getBirthDate());
-            out.println(emp.getHireDate());
-            out.println(emp.getGender());
+            AddEditEmployeeLogic logic = new AddEditEmployeeLogic();
+            int id = Integer.parseInt(request.getParameter("id"));
+            Employee emp = logic.getEmployeeById(id);
+            Salary salary = logic.getEmployeeSalary(id);
+            Title title = logic.getEmployeeTitle(id);
+            Department dept = logic.getEmployeeDepartment(id);
+            DepartmentEmployee deptEmp = logic.getDepartmentEmployee(id);
+            boolean isManager = logic.isEmployeeManager(id, dept.getNumber());
+            
+            out.println("<form id=\"empForm\" method=\"post\">");
+            
+            //employee info **************************
+            out.println("<div class=\"card mb-3\">");
+            out.println("<div class=\"card-header\"><h6>Employee information</h6></div>");
+            out.println("<div class=\"row mt-3 mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-6\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"first_name\">First name</label>");
+            out.println("<input class=\"form-control\" type=\"textbox\" name=\"first_name\" value=\"" + emp.getFirstName() + "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-6\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"last_name\">Last name</label>");
+            out.println("<input class=\"form-control\" type=\"textbox\" name=\"last_name\" value=\"" + emp.getLastName()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"row mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"birth_date\">Birth date</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"birth_date\" value=\"" + emp.getBirthDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"hire_date\">Hire date</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"hire_date\" value=\"" + emp.getHireDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<label>Gender</label>");
+            out.println("<div class=\"form-group\">");
+            out.println("<div class=\"form-check-inline\">");
+            out.println("<input id=\"gender_m\" class=\"form-check-input\" type=\"radio\" name=\"gender\" value=\"M\" " + (emp.getGender().equals("M") ? "checked" : "") + "/>");
+            out.println("<label class=\"form-check-label\" for=\"gender_m\">Male</label>");
+            out.println("</div>");
+            out.println("<div class=\"form-check-inline\">");
+            out.println("<input id=\"gender_f\" class=\"form-check-input\" type=\"radio\" name=\"gender\" value=\"F\" " + (emp.getGender().equals("F") ? "checked" : "") + "/>");
+            out.println("<label class=\"form-check-label\" for=\"gender_f\">Female</label>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("</div>");// /row
+            out.println("</div>");// /card
+            //employee info **************************
+            
+            //title info *****************************
+            out.println("<div class=\"card mb-3\">");
+            out.println("<div class=\"card-header\"><h6>Title information</h6></div>");
+            out.println("<div class=\"row mt-3 mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"title\">Title</label>");
+            out.println("<input class=\"form-control\" type=\"textbox\" name=\"title\" value=\"" + title.getTitle()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"title_from_date\">From</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"title_from_date\" value=\"" + title.getFromDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"title_to_date\">To</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"title_to_date\" value=\"" + title.getToDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("</div>"); // /row
+            out.println("</div>");// /card
+            //title info *****************************
+            
+            //salary info ****************************
+            out.println("<div class=\"card mb-3\">");
+            out.println("<div class=\"card-header\"><h6>Salary information</h6></div>");
+            out.println("<div class=\"row mt-3 mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"salary\">Salary</label>");
+            out.println("<input class=\"form-control\" type=\"textbox\" name=\"salary\" value=\"" + salary.getSalary()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"salary_from_date\">From</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"salary_from_date\" value=\"" + salary.getFromDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"salary_to_date\">To</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"salary_to_date\" value=\"" + salary.getToDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("</div>"); // /row
+            out.println("</div>"); // /card
+            //salary info ****************************
+            
+            //department info ************************
+            out.println("<div class=\"card mb-3\">");
+            out.println("<div class=\"card-header\"><h6>Department information</h6></div>");
+            out.println("<div class=\"row mt-3 mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"departmentSelector\">Department</label>");
+            out.println("<select class=\"custom-select\" id=\"departmentSelector\">");
+            for (Department d : logic.getDepartments()){
+                if (d.equals(dept)){
+                    out.println("<option value=\"\"></option>");
+                } else {
+                    out.println("");
+                }
+            }            
+            out.println("</select>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"dept_from_date\">From</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"dept_from_date\" value=\"" + deptEmp.getFromDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class=\"col-sm-4\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"dept_to_date\">To</label>");
+            out.println("<input class=\"form-control\" type=\"date\" name=\"dept_to_date\" value=\"" + deptEmp.getToDate()+ "\"/>");
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("</div>"); // /row
+            out.println("</div>"); // /card
+            //department info ************************
+            
+            out.println(WebHelper.getSaveResetButtons());
+            out.println("</form>");            
+            
             out.print(WebHelper.htmlBodyEnd());
             out.print(WebHelper.htmlEnd());
         }

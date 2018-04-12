@@ -1,5 +1,10 @@
+form {
+    width: 100%;
+}
+
 body {
-    background-color: #EAECEE;
+    background-color: #EAECEE !important;
+    margin-bottom: 3em !important;
 }
 
 .footer {
