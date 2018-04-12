@@ -7,11 +7,14 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.EmployeeLogic;
+import transferobjects.Employee;
 
 /**
  *
@@ -34,15 +37,19 @@ public class EmployeeModifyView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EmployeeModifyView</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EmployeeModifyView at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            out.print(WebHelper.htmlStart());
+            out.print(WebHelper.htmlHeader("Employees"));
+            out.print(WebHelper.htmlBodyStart("Employee modification", "You can bend the will of your employees here."));
+            EmployeeLogic logic = new EmployeeLogic();
+            Employee emp = logic.getEmployeeById(Integer.parseInt(request.getParameter("id")));
+            out.println(emp.getEmployeeNumber());
+            out.println(emp.getFirstName());
+            out.println(emp.getLastName());
+            out.println(emp.getBirthDate());
+            out.println(emp.getHireDate());
+            out.println(emp.getGender());
+            out.print(WebHelper.htmlBodyEnd());
+            out.print(WebHelper.htmlEnd());
         }
     }
 

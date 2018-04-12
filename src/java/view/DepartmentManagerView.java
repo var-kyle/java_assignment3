@@ -39,16 +39,18 @@ public class DepartmentManagerView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Department Managers"));
-            out.print(WebHelper.htmlBodyStart("Department Managers"));
+            out.print(WebHelper.htmlBodyStart("Department Managers", ""));
             DepartmentManagerLogic logic = new DepartmentManagerLogic();
             List<DepartmentManager> deptManagers = logic.getAllDepartmentManagers();
-            out.println("<table class=\"table\">");
+            out.println("<table class=\"table table-hover\">");
+            out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Employee Number</th>");
-            out.println("<th>Department Number</th>");
-            out.println("<th>From Date</th>");
-            out.println("<th>To Date</th>");
+            out.println("<th scope=\"col\">Employee number</th>");
+            out.println("<th scope=\"col\">Department number</th>");
+            out.println("<th scope=\"col\">From date</th>");
+            out.println("<th scope=\"col\">To date</th>");
             out.println("</tr>");
+            out.println("</thead>");
             for(DepartmentManager deptManager : deptManagers){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
                         deptManager.getEmployeeNumber(),

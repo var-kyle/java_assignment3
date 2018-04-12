@@ -12,5 +12,5 @@ import transferobjects.Title;
  * @author kylem
  */
 public interface TitleDAO extends BasicDAO<Title> {
-    
+    Title getById(int empNo);
 }

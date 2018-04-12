@@ -12,5 +12,5 @@ import transferobjects.DepartmentManager;
  * @author kylem
  */
 public interface DepartmentManagerDAO extends BasicDAO<DepartmentManager> {
-    
+    DepartmentManager getById(int empNo, String deptNo);
 }

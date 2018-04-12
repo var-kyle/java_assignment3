@@ -39,16 +39,18 @@ public class DepartmentEmployeeView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Department Employees"));
-            out.print(WebHelper.htmlBodyStart("Department Employees"));
+            out.print(WebHelper.htmlBodyStart("Department Employees", ""));
             DepartmentEmployeeLogic logic = new DepartmentEmployeeLogic();
             List<DepartmentEmployee> deptEmps = logic.getAllDepartmentEmployees();
-            out.println("<table class=\"table\">");
+            out.println("<table class=\"table table-hover\">");
+            out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Employee Number</th>");
-            out.println("<th>Department Number</th>");
-            out.println("<th>From Date</th>");
-            out.println("<th>To Date</th>");
+            out.println("<th scope=\"col\">Employee Number</th>");
+            out.println("<th scope=\"col\">Department Number</th>");
+            out.println("<th scope=\"col\">From Date</th>");
+            out.println("<th scope=\"col\">To Date</th>");
             out.println("</tr>");
+            out.println("</thead>");
             for(DepartmentEmployee deptEmp : deptEmps){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", deptEmp.getEmployeeNumber(), deptEmp.getDepartmentNumber(), deptEmp.getFromDate(), deptEmp.getToDate());
             }

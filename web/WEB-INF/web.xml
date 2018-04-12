@@ -28,7 +28,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DepartmentModifyView</servlet-name>
-        <url-pattern>/Departments/Modify</url-pattern>
+        <url-pattern>/Departments/Update</url-pattern>
     </servlet-mapping>
     
     <!-- Department Employees -->

@@ -39,16 +39,18 @@ public class TitleView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Titles"));
-            out.print(WebHelper.htmlBodyStart("Titles"));
+            out.print(WebHelper.htmlBodyStart("Titles", ""));
             TitleLogic logic = new TitleLogic();
             List<Title> salaries = logic.getAllTitles();
-            out.println("<table class=\"table\">");
+            out.println("<table class=\"table table-hover\">");
+            out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Employee Number</th>");
-            out.println("<th>Title</th>");
-            out.println("<th>From Date</th>");
-            out.println("<th>To Date</th>");
+            out.println("<th scope=\"col\">Employee Number</th>");
+            out.println("<th scope=\"col\">Title</th>");
+            out.println("<th scope=\"col\">From Date</th>");
+            out.println("<th scope=\"col\">To Date</th>");
             out.println("</tr>");
+            out.println("</thead>");
             for(Title salary : salaries){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
                         salary.getEmployeeNumber(),

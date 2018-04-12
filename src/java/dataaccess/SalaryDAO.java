@@ -12,5 +12,5 @@ import transferobjects.Salary;
  * @author kylem
  */
 public interface SalaryDAO extends BasicDAO<Salary> {
-    
+    Salary getById(int empNo);
 }

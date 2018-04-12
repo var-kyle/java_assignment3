@@ -39,16 +39,18 @@ public class SalaryView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Salaries"));
-            out.print(WebHelper.htmlBodyStart("Salaries"));
+            out.print(WebHelper.htmlBodyStart("Salaries", ""));
             SalaryLogic logic = new SalaryLogic();
             List<Salary> salaries = logic.getAllSalaries();
-            out.println("<table class=\"table\">");
+            out.println("<table class=\"table table-hover\">");
+            out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Employee Number</th>");
-            out.println("<th>Salary</th>");
-            out.println("<th>From Date</th>");
-            out.println("<th>To Date</th>");
+            out.println("<th scope=\"col\">Employee Number</th>");
+            out.println("<th scope=\"col\">Salary</th>");
+            out.println("<th scope=\"col\">From Date</th>");
+            out.println("<th scope=\"col\">To Date</th>");
             out.println("</tr>");
+            out.println("</thead>");
             for(Salary salary : salaries){
                 out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
                         salary.getEmployeeNumber(),

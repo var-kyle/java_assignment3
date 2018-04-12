@@ -39,20 +39,23 @@ public class EmployeeView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Employees"));
-            out.print(WebHelper.htmlBodyStart("Employees"));
+            out.print(WebHelper.htmlBodyStart("Employees", "Clicking on the employee number will allow you to edit that record."));
             EmployeeLogic logic = new EmployeeLogic();
             List<Employee> employees = logic.getAllEmployees();
-            out.println("<table class=\"table\">");
+            out.println("<table class=\"table table-hover\">");
+            out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Employee Number</th>");
-            out.println("<th>Birth Date</th>");
-            out.println("<th>First Name</th>");
-            out.println("<th>Last Name</th>");
-            out.println("<th>Gender</th>");
-            out.println("<th>Hire Date</th>");
+            out.println("<th scope=\"col\">Employee Number</th>");
+            out.println("<th scope=\"col\">Birth Date</th>");
+            out.println("<th scope=\"col\">First Name</th>");
+            out.println("<th scope=\"col\">Last Name</th>");
+            out.println("<th scope=\"col\">Gender</th>");
+            out.println("<th scope=\"col\">Hire Date</th>");
             out.println("</tr>");
+            out.println("</thead>");
             for(Employee employee : employees){
-                out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                out.printf("<tr><td><a href=\"%s\">%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                        "Employees/Modify?id=" + employee.getEmployeeNumber(),
                         employee.getEmployeeNumber(),
                         employee.getBirthDate(),
                         employee.getFirstName(),

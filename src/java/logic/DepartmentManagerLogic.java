@@ -25,8 +25,8 @@ public class DepartmentManagerLogic {
         return departmentManagerDAO.getAll();
     }
     
-    public DepartmentManager getDepartmentManagerById(int empNo) {
-        return departmentManagerDAO.getById(empNo);
+    public DepartmentManager getDepartmentManagerById(int empNo, String deptNo) {
+        return departmentManagerDAO.getById(empNo, deptNo);
     }
     
     public void insertDepartmentManager(DepartmentManager deptEmp) {

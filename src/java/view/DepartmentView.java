@@ -39,16 +39,21 @@ public class DepartmentView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Departments"));
-            out.print(WebHelper.htmlBodyStart("Departments"));
+            out.print(WebHelper.htmlBodyStart("Departments", "Clicking on the department number will allow you to edit that record."));
             DepartmentLogic logic = new DepartmentLogic();
             List<Department> departments = logic.getAllDepartments();
-            out.println("<table class=\"table\">");
+            out.println("<table class=\"table table-hover\">");
+            out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Department Number</th>");
-            out.println("<th>Department Name</th>");
+            out.println("<th scope=\"col\">Department Number</th>");
+            out.println("<th scope=\"col\">Department Name</th>");
             out.println("</tr>");
+            out.println("</thead>");
             for(Department department : departments){
-                out.printf("<tr><td>%s</td><td>%s</td></tr>", department.getNumber(), department.getName());
+                out.printf("<tr><td><a href=\"%s\">%s</a></td><td>%s</td></tr>",
+                        "departments/update/" + department.getNumber(),
+                        department.getNumber(),
+                        department.getName());
             }
             out.println("</table>");
             out.print(WebHelper.htmlBodyEnd());

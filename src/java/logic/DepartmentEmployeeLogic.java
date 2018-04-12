@@ -25,8 +25,8 @@ public class DepartmentEmployeeLogic {
         return departmentEmployeeDAO.getAll();
     }
     
-    public DepartmentEmployee getDepartmentEmployeeById(int empNo) {
-        return departmentEmployeeDAO.getById(empNo);
+    public DepartmentEmployee getDepartmentEmployeeById(int empNo, String deptNo) {
+        return departmentEmployeeDAO.getById(empNo, deptNo);
     }
     
     public void insertDepartmentEmployee(DepartmentEmployee deptEmp) {
