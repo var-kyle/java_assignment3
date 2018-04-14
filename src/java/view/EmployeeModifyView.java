@@ -39,7 +39,6 @@ public class EmployeeModifyView extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Employees"));
             out.print(WebHelper.htmlBodyStart("Employee modification", "You can bend the will of your employees here."));
@@ -174,9 +173,9 @@ public class EmployeeModifyView extends HttpServlet {
             out.println("<select class=\"custom-select\" id=\"departmentSelector\">");
             for (Department d : logic.getDepartments()){
                 if (d.equals(dept)){
-                    out.println("<option value=\"\"></option>");
+                    out.println("<option value=\"" + d.getNumber() + "\" selected>" + d.getName() + "</option>");
                 } else {
-                    out.println("");
+                    out.println("<option value=\"" + d.getNumber() + "\">" + d.getName() + "</option>");
                 }
             }            
             out.println("</select>");
