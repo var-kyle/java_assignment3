@@ -7,6 +7,9 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +29,8 @@ import transferobjects.Title;
 @WebServlet(name = "EmployeeModifyView", urlPatterns = {"/EmployeeModifyView"})
 public class EmployeeModifyView extends HttpServlet {
 
+    AddEditEmployeeLogic logic = new AddEditEmployeeLogic();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,7 +48,7 @@ public class EmployeeModifyView extends HttpServlet {
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Employees"));
             out.print(WebHelper.htmlBodyStart("Employee modification", "You can bend the will of your employees here."));
-            AddEditEmployeeLogic logic = new AddEditEmployeeLogic();
+            //AddEditEmployeeLogic logic = new AddEditEmployeeLogic();
             int id = Integer.parseInt(request.getParameter("id"));
             Employee emp = logic.getEmployeeById(id);
             Salary salary = logic.getEmployeeSalary(id);
@@ -174,9 +179,9 @@ public class EmployeeModifyView extends HttpServlet {
             out.println("<select class=\"custom-select\" id=\"departmentSelector\">");
             for (Department d : logic.getDepartments()){
                 if (d.equals(dept)){
-                    out.println("<option value=\"\"></option>");
+                    out.println("<option value=\"" + d.getNumber() + "\" selected>" + d.getName() + "</option>");
                 } else {
-                    out.println("");
+                    out.println("<option value=\"" + d.getNumber() + "\">" + d.getName() + "</option>");
                 }
             }            
             out.println("</select>");
@@ -235,6 +240,15 @@ public class EmployeeModifyView extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Map<String, String[]> map = request.getParameterMap();
+        
+        try {
+            logic.updateEmployee(map);
+            
+        } catch (IllegalArgumentException iae) {
+            Logger.getLogger(EmployeeModifyView.class.getName()).log(Level.SEVERE, null, iae);
+        }
         processRequest(request, response);
     }
 
