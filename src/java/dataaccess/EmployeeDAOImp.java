@@ -23,7 +23,7 @@ import transferobjects.factory.Factory;
  */
 public class EmployeeDAOImp implements EmployeeDAO {
 
-    private static final String GET_ALL_EMPLOYEES = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees ORDER BY emp_no LIMIT " + ROW_LIMIT;
+    private static final String GET_ALL_EMPLOYEES = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees ORDER BY emp_no DESC LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees WHERE emp_no = ?";
     private static final String INSERT_EMPLOYEE = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES(?,?,?,?,?,?)";
     private static final String UPDATE_EMPLOYEE = "UPDATE employees SET birth_date = ?, first_name = ?, last_name = ?, gender = ?, hire_date = ? WHERE emp_no = ?";
@@ -122,7 +122,6 @@ public class EmployeeDAOImp implements EmployeeDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_EMPLOYEE);
@@ -132,17 +131,10 @@ public class EmployeeDAOImp implements EmployeeDAO {
             pstmt.setString(4, emp.getLastName());
             pstmt.setString(5, emp.getGender());
             pstmt.setDate(6, emp.getHireDate());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();
@@ -166,7 +158,6 @@ public class EmployeeDAOImp implements EmployeeDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(UPDATE_EMPLOYEE);
@@ -176,17 +167,11 @@ public class EmployeeDAOImp implements EmployeeDAO {
             pstmt.setString(4, emp.getGender());
             pstmt.setDate(5, emp.getHireDate());
             pstmt.setInt(6, emp.getEmployeeNumber());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();

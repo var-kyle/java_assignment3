@@ -120,23 +120,15 @@ public class DepartmentDAOImp implements DepartmentDAO {
     public Department insert(Department dept, int id) {
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_DEPARTMENT);
             pstmt.setString(1, dept.getNumber());
             pstmt.setString(2, dept.getName());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();
@@ -160,23 +152,15 @@ public class DepartmentDAOImp implements DepartmentDAO {
     public Department update(Department dept) {
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(UPDATE_DEPARTMENT);
             pstmt.setString(1, dept.getName());
             pstmt.setString(2, dept.getNumber());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();

@@ -121,7 +121,6 @@ public class SalaryDAOImp implements SalaryDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_SALARY);
@@ -129,17 +128,10 @@ public class SalaryDAOImp implements SalaryDAO {
             pstmt.setInt(2, salary.getSalary());
             pstmt.setDate(3, salary.getFromDate());
             pstmt.setDate(4, salary.getToDate());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SalaryDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();
@@ -163,7 +155,6 @@ public class SalaryDAOImp implements SalaryDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(UPDATE_SALARY);
@@ -171,17 +162,10 @@ public class SalaryDAOImp implements SalaryDAO {
             pstmt.setDate(2, salary.getFromDate());
             pstmt.setDate(3, salary.getToDate());
             pstmt.setInt(4, salary.getEmployeeNumber());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SalaryDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();

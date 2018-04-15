@@ -7,6 +7,9 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -235,7 +238,16 @@ public class EmployeeAddView extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logic.addEmployee(request.getParameterMap());
+        
+         Map<String, String[]> map = request.getParameterMap();
+        
+        try {
+            logic.updateEmployee(map);
+            
+        } catch (IllegalArgumentException iae) {
+            Logger.getLogger(EmployeeModifyView.class.getName()).log(Level.SEVERE, null, iae);
+        }
+        
         processRequest(request, response);
         
         

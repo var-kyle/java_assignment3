@@ -45,7 +45,8 @@ public class SalaryBuilder {
     }
     
     public SalaryBuilder setEmployeeNumber(Map<String, String[]> map) {
-        salary.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
+        if (map.containsKey(COL_EMP_NO))
+            salary.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
         return this;
     }
     

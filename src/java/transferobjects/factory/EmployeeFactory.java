@@ -41,7 +41,7 @@ public class EmployeeFactory extends AbstractFactory<Employee> {
     public Employee createFromMap(Map<String, String[]> map) {
         EmployeeBuilder builder = new EmployeeBuilder();
         return builder
-                //.setEmployeeNumber(map)
+                .setEmployeeNumber(map)
                 .setFirstName(map)
                 .setLastName(map)
                 .setGender(map)

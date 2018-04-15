@@ -1,9 +1,9 @@
-form {
+main form {
     width: 100%;
 }
 
 body {
-    background-color: #EAECEE !important;
+    background-color: #F5F5F5 !important;
     margin-bottom: 3em !important;
 }
 

@@ -45,7 +45,8 @@ public class DepartmentManagerBuilder {
     }
     
     public DepartmentManagerBuilder setEmployeeNumber(Map<String, String[]> map) {
-        deptMngr.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
+        if (map.containsKey(COL_EMP_NO))
+            deptMngr.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
         return this;
     }
     

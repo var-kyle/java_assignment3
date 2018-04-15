@@ -120,7 +120,6 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_DEPARTMENT_EMPLOYEE);
@@ -128,17 +127,10 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
             pstmt.setString(2, deptEmp.getDepartmentNumber());
             pstmt.setDate(3, deptEmp.getFromDate());
             pstmt.setDate(4, deptEmp.getToDate());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentEmployeeDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();
@@ -162,7 +154,6 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(UPDATE_DEPARTMENT_EMPLOYEE);
@@ -170,17 +161,10 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
             pstmt.setDate(2, deptEmp.getToDate());
             pstmt.setInt(3, deptEmp.getEmployeeNumber());
             pstmt.setString(4, deptEmp.getDepartmentNumber());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentEmployeeDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();

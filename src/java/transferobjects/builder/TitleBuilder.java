@@ -47,7 +47,8 @@ public class TitleBuilder {
     }
     
     public TitleBuilder setEmployeeNumber(Map<String, String[]> map) {
-        title.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
+        if (map.containsKey(COL_EMP_NO))
+            title.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
         return this;
     }
     

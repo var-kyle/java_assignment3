@@ -121,7 +121,6 @@ public class TitleDAOImp implements TitleDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_TITLE);
@@ -129,17 +128,10 @@ public class TitleDAOImp implements TitleDAO {
             pstmt.setString(2, title.getTitle());
             pstmt.setDate(3, title.getFromDate());
             pstmt.setDate(4, title.getToDate());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TitleDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();
@@ -163,7 +155,6 @@ public class TitleDAOImp implements TitleDAO {
         @SuppressWarnings("unchecked")
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(UPDATE_TITLE);
@@ -171,17 +162,10 @@ public class TitleDAOImp implements TitleDAO {
             pstmt.setDate(2, title.getFromDate());
             pstmt.setDate(3, title.getToDate());
             pstmt.setInt(4, title.getEmployeeNumber());
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TitleDAOImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
             try {
                 if (pstmt != null) {
                     pstmt.close();
