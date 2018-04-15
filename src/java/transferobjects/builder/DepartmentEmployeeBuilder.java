@@ -5,8 +5,10 @@
  */
 package transferobjects.builder;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 import transferobjects.DepartmentEmployee;
 
 /**
@@ -18,6 +20,8 @@ public class DepartmentEmployeeBuilder {
     private static final String COL_DEPT_NO = "dept_no";
     private static final String COL_FROM_DATE = "from_date";
     private static final String COL_TO_DATE = "to_date";
+    private static final String MAP_FROM_DATE = "dept_from_date";
+    private static final String MAP_TO_DATE = "dept_to_date";
     private DepartmentEmployee deptEmp = new DepartmentEmployee();
     
     public DepartmentEmployeeBuilder setEmployeeNumber(ResultSet rs) throws SQLException{
@@ -37,6 +41,26 @@ public class DepartmentEmployeeBuilder {
     
     public DepartmentEmployeeBuilder setToDate(ResultSet rs) throws SQLException {
         deptEmp.setToDate(rs.getDate(COL_TO_DATE));
+        return this;
+    }
+    
+    public DepartmentEmployeeBuilder setEmployeeNumber(Map<String, String[]> map) {
+        deptEmp.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
+        return this;
+    }
+    
+    public DepartmentEmployeeBuilder setDepartmentNumber(Map<String, String[]> map) {
+        deptEmp.setDepartmentNumber(map.get(COL_DEPT_NO)[0]);        
+        return this;
+    }
+    
+    public DepartmentEmployeeBuilder setFromDate(Map<String, String[]> map) {
+        deptEmp.setFromDate(Date.valueOf(map.get(MAP_FROM_DATE)[0]));
+        return this;
+    }
+    
+    public DepartmentEmployeeBuilder setToDate(Map<String, String[]> map) {
+        deptEmp.setToDate(Date.valueOf(map.get(MAP_TO_DATE)[0]));
         return this;
     }
     

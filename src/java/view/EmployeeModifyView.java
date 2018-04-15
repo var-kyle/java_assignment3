@@ -171,11 +171,21 @@ public class EmployeeModifyView extends HttpServlet {
             //department info ************************
             out.println("<div class=\"card mb-3\">");
             out.println("<div class=\"card-header\"><h6>Department information</h6></div>");
+            
+            out.println("<div class=\"row mt-3 mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-12\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"departmentSelector\">Manager?</label>");
+            out.println("<input type=\"checkbox\" class=\"form-check-input\" id=\"is_manager\"" + (logic.isEmployeeManager(id, dept.getNumber()) ? "selected" : "") + ">");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>"); // /row
+            
             out.println("<div class=\"row mt-3 mr-3 ml-3\">");
             out.println("<div class=\"col-sm-4\">");
             out.println("<div class=\"form-group\">");
             out.println("<label for=\"departmentSelector\">Department</label>");
-            out.println("<select class=\"custom-select\" id=\"departmentSelector\">");
+            out.println("<select name=\"dept_no\" class=\"custom-select\" id=\"departmentSelector\">");
             for (Department d : logic.getDepartments()){
                 if (d.equals(dept)){
                     out.println("<option value=\"" + d.getNumber() + "\" selected>" + d.getName() + "</option>");

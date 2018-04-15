@@ -23,7 +23,6 @@ public class EmployeeFactory extends AbstractFactory<Employee> {
     public Employee createFromResultSet(ResultSet rs) {
         try {
             EmployeeBuilder builder = new EmployeeBuilder();
-            
             return builder
                     .setEmployeeNumber(rs)
                     .setFirstName(rs)
@@ -40,7 +39,15 @@ public class EmployeeFactory extends AbstractFactory<Employee> {
 
     @Override
     public Employee createFromMap(Map<String, String[]> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EmployeeBuilder builder = new EmployeeBuilder();
+        return builder
+                //.setEmployeeNumber(map)
+                .setFirstName(map)
+                .setLastName(map)
+                .setGender(map)
+                .setBirthDate(map)
+                .setHireDate(map)
+                .get();
     }
-    
+
 }

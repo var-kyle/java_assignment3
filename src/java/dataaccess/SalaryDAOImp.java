@@ -25,7 +25,7 @@ public class SalaryDAOImp implements SalaryDAO {
 
     private static final String GET_ALL_SALARIES = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, salary, from_date, to_date FROM salaries WHERE emp_no = ?";
-    private static final String INSERT_SALARY = "INSERT INTO salary(emp_no, salary, from_date, to_date) VALUES(?,?,?,?)";
+    private static final String INSERT_SALARY = "INSERT INTO salary(emp_no, salary, from_date, to_date) VALUES((select max(emp_no)+1 from employees),?,?,?)";
     private static final String UPDATE_SALARY = "UPDATE salary SET salary = ?, from_date = ?, to_date = ? WHERE emp_no = ?";
 
     private final Factory<Salary> factory;
@@ -125,10 +125,10 @@ public class SalaryDAOImp implements SalaryDAO {
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_SALARY);
-            pstmt.setInt(1, salary.getEmployeeNumber());
-            pstmt.setInt(2, salary.getSalary());
-            pstmt.setDate(3, salary.getFromDate());
-            pstmt.setDate(4, salary.getToDate());
+            //pstmt.setInt(1, salary.getEmployeeNumber());
+            pstmt.setInt(1, salary.getSalary());
+            pstmt.setDate(2, salary.getFromDate());
+            pstmt.setDate(3, salary.getToDate());
             rs = pstmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(SalaryDAOImp.class.getName()).log(Level.SEVERE, null, ex);

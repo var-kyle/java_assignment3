@@ -9,6 +9,9 @@ import dataaccess.DepartmentDAO;
 import dataaccess.DepartmentDAOImp;
 import java.util.List;
 import transferobjects.Department;
+import transferobjects.factory.DTOFactoryCreator;
+import transferobjects.factory.Factory;
+import java.util.Map;
 
 /**
  *
@@ -16,9 +19,11 @@ import transferobjects.Department;
  */
 public class DepartmentLogic {
     private DepartmentDAO departmentDAO = null;
-
+    private final Factory<Department> factory;
+    
     public DepartmentLogic() {
         departmentDAO = new DepartmentDAOImp();
+        factory = DTOFactoryCreator.createBuilder(Department.class);
     }
 
     public List<Department> getAllDepartments() {
@@ -30,7 +35,36 @@ public class DepartmentLogic {
     }
     
     public void insertDepartment(Department dept) {
-        //TODO: some validation stuff first
+        departmentDAO.insert(dept);
+    }    
+    
+    public void addDepartment(Map<String, String[]> map) {
+        Department dept = factory.createFromMap(map);
+        cleanDepartment(dept);
+        validateDepartment(dept);
         departmentDAO.insert(dept);
     }
+    
+    public void updateDepartment(Map<String, String[]> map) {
+        Department dept = factory.createFromMap(map);
+        cleanDepartment(dept);
+        validateDepartment(dept);
+        departmentDAO.update(dept);
+    }
+    
+    public void validateDepartment(Department dept) {
+        Validation.validateString(dept.getNumber(), "Department Code", 4, false);
+        Validation.validateString(dept.getName(), "Department Name", 40, false);
+    }    
+
+    private void cleanDepartment(Department dept) {
+        if (dept.getNumber()!= null) {
+            dept.setNumber(dept.getNumber().trim());
+        }
+        if (dept.getName() != null) {
+            dept.setName(dept.getName().trim());
+        }
+    }
+
+    
 }

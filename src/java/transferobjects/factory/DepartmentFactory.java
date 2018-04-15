@@ -18,7 +18,7 @@ import transferobjects.builder.DepartmentBuilder;
  * @author kyle
  */
 public class DepartmentFactory extends AbstractFactory<Department> {
-    
+
     @Override
     public Department createFromResultSet(ResultSet rs) {
         try {
@@ -35,7 +35,11 @@ public class DepartmentFactory extends AbstractFactory<Department> {
 
     @Override
     public Department createFromMap(Map<String, String[]> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DepartmentBuilder builder = new DepartmentBuilder();
+        return builder
+                .setDepartmentNumber(map)
+                .setName(map)
+                .get();
     }
-    
+
 }

@@ -17,7 +17,7 @@ import transferobjects.builder.TitleBuilder;
  *
  * @author kyle
  */
-public class TitleFactory extends AbstractFactory<Title>  {
+public class TitleFactory extends AbstractFactory<Title> {
 
     @Override
     public Title createFromResultSet(ResultSet rs) {
@@ -28,7 +28,7 @@ public class TitleFactory extends AbstractFactory<Title>  {
                     .setTitle(rs)
                     .setFromDate(rs)
                     .setToDate(rs)
-                    .get();                    
+                    .get();
         } catch (SQLException ex) {
             Logger.getLogger(TitleFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +37,13 @@ public class TitleFactory extends AbstractFactory<Title>  {
 
     @Override
     public Title createFromMap(Map<String, String[]> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TitleBuilder builder = new TitleBuilder();
+        return builder
+                .setEmployeeNumber(map)
+                .setTitle(map)
+                .setFromDate(map)
+                .setToDate(map)
+                .get();
     }
-    
+
 }

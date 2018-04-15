@@ -26,6 +26,8 @@ import transferobjects.Title;
 @WebServlet(name = "EmployeeAddView", urlPatterns = {"/EmployeeAddView"})
 public class EmployeeAddView extends HttpServlet {
 
+    AddEditEmployeeLogic logic = new AddEditEmployeeLogic();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,15 +44,7 @@ public class EmployeeAddView extends HttpServlet {
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Employees"));
             out.print(WebHelper.htmlBodyStart("Employee modification", "You can bend the will of your employees here."));
-            AddEditEmployeeLogic logic = new AddEditEmployeeLogic();
-            //int id = Integer.parseInt(request.getParameter("id"));
-            //Employee emp = logic.getEmployeeById(id);
-            //Salary salary = logic.getEmployeeSalary(id);
-            //Title title = logic.getEmployeeTitle(id);
-            //Department dept = logic.getEmployeeDepartment(id);
-            //DepartmentEmployee deptEmp = logic.getDepartmentEmployee(id);
-            //boolean isManager = logic.isEmployeeManager(id, dept.getNumber());
-            
+                        
             out.println("<form id=\"empForm\" method=\"post\">");
             
             //employee info **************************
@@ -166,12 +160,22 @@ public class EmployeeAddView extends HttpServlet {
             //department info ************************
             out.println("<div class=\"card mb-3\">");
             out.println("<div class=\"card-header\"><h6>Department information</h6></div>");
+                        
+            out.println("<div class=\"row mt-3 mr-3 ml-3\">");
+            out.println("<div class=\"col-sm-12\">");
+            out.println("<div class=\"form-group\">");
+            out.println("<label for=\"departmentSelector\">Manager?</label>");
+            out.println("<input type=\"checkbox\" class=\"form-check-input\" id=\"is_manager\">");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>"); // /row
+            
             out.println("<div class=\"row mt-3 mr-3 ml-3\">");
             out.println("<div class=\"col-sm-4\">");
             out.println("<div class=\"form-group\">");
             out.println("<label for=\"departmentSelector\">Department</label>");
-            out.println("<select class=\"custom-select\" id=\"departmentSelector\">");
-            out.println("<option value=\"-1\">Select...</option>");
+            out.println("<select name=\"dept_no\" class=\"custom-select\" id=\"departmentSelector\">");
+            out.println("<optionvalue=\"-1\">Select...</option>");
             for (Department d : logic.getDepartments()){
                 out.println("<option value=\"" + d.getNumber() + "\">" + d.getName() + "</option>");
             }            
@@ -231,7 +235,10 @@ public class EmployeeAddView extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        logic.addEmployee(request.getParameterMap());
         processRequest(request, response);
+        
+        
     }
 
     /**

@@ -7,8 +7,12 @@ package logic;
 
 import dataaccess.TitleDAO;
 import dataaccess.TitleDAOImp;
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import transferobjects.Title;
+import transferobjects.factory.DTOFactoryCreator;
+import transferobjects.factory.Factory;
 
 /**
  *
@@ -16,9 +20,11 @@ import transferobjects.Title;
  */
 public class TitleLogic {
     private TitleDAO titleDAO = null;
+    private final Factory<Title> factory;
     
     public TitleLogic() {
         titleDAO = new TitleDAOImp();
+        factory = DTOFactoryCreator.createBuilder(Title.class);
     }
 
     public List<Title> getAllTitles() {
@@ -29,8 +35,34 @@ public class TitleLogic {
         return titleDAO.getById(empNo);
     }
     
-    public void insertTitle(Title title) {
-        //TODO: some validation stuff first
+    public void addTitle(Map<String, String[]> map) {
+        Title title = factory.createFromMap(map);        
+        cleanTitle(title);
+        validateTitle(title);
         titleDAO.insert(title);
+    }
+    
+    public void updateTitle(Map<String, String[]> map) {
+        Title title = factory.createFromMap(map);        
+        cleanTitle(title);
+        validateTitle(title);
+        titleDAO.update(title);
+    }
+    
+    public void validateTitle(Title title) {
+        Validation.validateInt(title.getEmployeeNumber(), "Employee Number", Integer.MAX_VALUE, Integer.MIN_VALUE);
+        Validation.validateString(title.getTitle(), "Title", 50, false);
+        Validation.validateDate(title.getFromDate(), "From Date", false);
+        Validation.validateDate(title.getToDate(), "To Date", true);
+    }
+    
+    public void cleanTitle(Title title) {
+        if (title.getTitle()!= null) {
+            title.setTitle(title.getTitle().trim());
+        }
+        
+        if (title.getFromDate() == null) {
+            title.setFromDate(new Date(System.currentTimeMillis()));
+        }
     }
 }

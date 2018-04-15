@@ -6,12 +6,15 @@
 package logic;
 
 import java.util.List;
+import java.util.Map;
 import transferobjects.Department;
 import transferobjects.DepartmentEmployee;
 import transferobjects.DepartmentManager;
 import transferobjects.Employee;
 import transferobjects.Salary;
 import transferobjects.Title;
+import transferobjects.factory.DTOFactoryCreator;
+import transferobjects.factory.Factory;
 
 /**
  *
@@ -25,6 +28,8 @@ public class AddEditEmployeeLogic {
     private final DepartmentLogic deptLogic = new DepartmentLogic();
     private final DepartmentManagerLogic deptMngrLogic = new DepartmentManagerLogic();
     private final DepartmentEmployeeLogic deptEmpLogic = new DepartmentEmployeeLogic();
+    
+    private final Factory<Employee> factory = DTOFactoryCreator.createBuilder(Employee.class);
     
     public Employee getEmployeeById(int id){
         return empLogic.getEmployeeById(id);
@@ -56,5 +61,24 @@ public class AddEditEmployeeLogic {
     
     public List<Department> getDepartments(){
         return deptLogic.getAllDepartments();
+    }
+    
+    public void addEmployee(Map<String, String[]> map) {
+        empLogic.addEmployee(map);
+        String[] s = new String[1];
+        salaryLogic.addSalary(map);
+        titleLogic.addTitle(map);
+        //deptLogic.addDepartment(map);
+        deptEmpLogic.addDepartmentEmployee(map);
+        deptMngrLogic.addDepartmentManager(map);
+    }
+    
+    public void updateEmployee(Map<String, String[]> map) {
+        empLogic.updateEmployee(map);
+        salaryLogic.updateSalary(map);
+        titleLogic.updateTitle(map);
+        //deptLogic.updateDepartment(map);
+        deptEmpLogic.updateDepartmentEmployee(map);
+        deptMngrLogic.updateDepartmentManager(map);
     }
 }

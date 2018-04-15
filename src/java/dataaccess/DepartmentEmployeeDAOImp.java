@@ -24,7 +24,7 @@ import transferobjects.factory.Factory;
 public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
     private static final String GET_ALL_DEPARTMENT_EMPLOYEES = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp ORDER BY emp_no LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp WHERE emp_no = ?";
-    private static final String INSERT_DEPARTMENT_EMPLOYEE = "INSERT INTO dept_emp(emp_no, dept_no, from_date, to_date) VALUES(?,?,?,?)";
+    private static final String INSERT_DEPARTMENT_EMPLOYEE = "INSERT INTO dept_emp(emp_no, dept_no, from_date, to_date) VALUES((select max(emp_no)+1 from employees),?,?,?)";
     private static final String UPDATE_DEPARTMENT_EMPLOYEE = "UPDATE dept_emp SET from_date = ?, to_date = ? WHERE emp_no = ? AND dept_no = ?";
     
     private final Factory<DepartmentEmployee> factory;
@@ -124,10 +124,10 @@ public class DepartmentEmployeeDAOImp implements DepartmentEmployeeDAO {
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_DEPARTMENT_EMPLOYEE);
-            pstmt.setInt(1, deptEmp.getEmployeeNumber());
-            pstmt.setString(2, deptEmp.getDepartmentNumber());
-            pstmt.setDate(3, deptEmp.getFromDate());
-            pstmt.setDate(4, deptEmp.getToDate());
+            //pstmt.setInt(1, deptEmp.getEmployeeNumber());
+            pstmt.setString(1, deptEmp.getDepartmentNumber());
+            pstmt.setDate(2, deptEmp.getFromDate());
+            pstmt.setDate(3, deptEmp.getToDate());
             rs = pstmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentEmployeeDAOImp.class.getName()).log(Level.SEVERE, null, ex);

@@ -17,7 +17,7 @@ import transferobjects.builder.SalaryBuilder;
  *
  * @author kyle
  */
-public class SalaryFactory extends AbstractFactory<Salary>{
+public class SalaryFactory extends AbstractFactory<Salary> {
 
     @Override
     public Salary createFromResultSet(ResultSet rs) {
@@ -28,7 +28,7 @@ public class SalaryFactory extends AbstractFactory<Salary>{
                     .setSalary(rs)
                     .setFromDate(rs)
                     .setToDate(rs)
-                    .get();                    
+                    .get();
         } catch (SQLException ex) {
             Logger.getLogger(TitleFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +37,13 @@ public class SalaryFactory extends AbstractFactory<Salary>{
 
     @Override
     public Salary createFromMap(Map<String, String[]> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SalaryBuilder builder = new SalaryBuilder();
+        return builder
+                .setEmployeeNumber(map)
+                .setSalary(map)
+                .setFromDate(map)
+                .setToDate(map)
+                .get();
     }
-    
+
 }

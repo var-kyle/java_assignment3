@@ -28,7 +28,7 @@ public class DepartmentEmployeeFactory extends AbstractFactory<DepartmentEmploye
                     .setDepartmentNumber(rs)
                     .setFromDate(rs)
                     .setToDate(rs)
-                    .get();                    
+                    .get();
         } catch (SQLException ex) {
             Logger.getLogger(TitleFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +37,13 @@ public class DepartmentEmployeeFactory extends AbstractFactory<DepartmentEmploye
 
     @Override
     public DepartmentEmployee createFromMap(Map<String, String[]> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DepartmentEmployeeBuilder builder = new DepartmentEmployeeBuilder();
+        return builder
+                .setEmployeeNumber(map)
+                .setDepartmentNumber(map)
+                .setFromDate(map)
+                .setToDate(map)
+                .get();
     }
-    
+
 }

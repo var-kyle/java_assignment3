@@ -25,7 +25,7 @@ public class TitleDAOImp implements TitleDAO {
 
     private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, title, from_date, to_date FROM titles WHERE emp_no = ?";
-    private static final String INSERT_TITLE = "INSERT INTO titles(emp_no, title, from_date, to_date) VALUES(?,?,?,?)";
+    private static final String INSERT_TITLE = "INSERT INTO titles(emp_no, title, from_date, to_date) VALUES((select max(emp_no)+1,?,?,?)";
     private static final String UPDATE_TITLE = "UPDATE titles SET title = ?, from_date = ?, to_date = ? WHERE emp_no = ?";
     
     private final Factory<Title> factory;
@@ -125,10 +125,10 @@ public class TitleDAOImp implements TitleDAO {
         try{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(INSERT_TITLE);
-            pstmt.setInt(1, title.getEmployeeNumber());
-            pstmt.setString(2, title.getTitle());
-            pstmt.setDate(3, title.getFromDate());
-            pstmt.setDate(4, title.getToDate());
+            //pstmt.setInt(1, title.getEmployeeNumber());
+            pstmt.setString(1, title.getTitle());
+            pstmt.setDate(2, title.getFromDate());
+            pstmt.setDate(3, title.getToDate());
             rs = pstmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(TitleDAOImp.class.getName()).log(Level.SEVERE, null, ex);
