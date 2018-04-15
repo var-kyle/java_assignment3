@@ -44,7 +44,6 @@ public class EmployeeModifyView extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.print(WebHelper.htmlStart());
             out.print(WebHelper.htmlHeader("Employees"));
             out.print(WebHelper.htmlBodyStart("Employee modification", "You can bend the will of your employees here."));
