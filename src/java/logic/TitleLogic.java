@@ -35,11 +35,11 @@ public class TitleLogic {
         return titleDAO.getById(empNo);
     }
     
-    public void addTitle(Map<String, String[]> map) {
+    public void addTitle(Map<String, String[]> map, int id) {
         Title title = factory.createFromMap(map);        
         cleanTitle(title);
         validateTitle(title);
-        titleDAO.insert(title);
+        titleDAO.insert(title, id);
     }
     
     public void updateTitle(Map<String, String[]> map) {

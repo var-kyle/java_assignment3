@@ -34,15 +34,11 @@ public class DepartmentLogic {
         return departmentDAO.getById(deptNo);
     }
     
-    public void insertDepartment(Department dept) {
-        departmentDAO.insert(dept);
-    }    
-    
-    public void addDepartment(Map<String, String[]> map) {
+    public void addDepartment(Map<String, String[]> map, int id) {
         Department dept = factory.createFromMap(map);
         cleanDepartment(dept);
         validateDepartment(dept);
-        departmentDAO.insert(dept);
+        departmentDAO.insert(dept, id);
     }
     
     public void updateDepartment(Map<String, String[]> map) {

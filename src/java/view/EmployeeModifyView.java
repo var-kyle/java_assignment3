@@ -57,7 +57,7 @@ public class EmployeeModifyView extends HttpServlet {
             boolean isManager = logic.isEmployeeManager(id, dept.getNumber());
             
             out.println("<form id=\"empForm\" method=\"post\">");
-            
+            out.println("<input type=\"hidden\" name=\"emp_no\" value=\"" + id + "\" />");
             //employee info **************************
             out.println("<div class=\"card mb-3\">");
             out.println("<div class=\"card-header\"><h6>Employee information</h6></div>");

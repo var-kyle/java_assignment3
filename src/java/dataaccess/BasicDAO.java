@@ -14,6 +14,6 @@ import java.util.List;
 public interface BasicDAO<T> {
     final int ROW_LIMIT = 100;
     List<T> getAll();
-    T insert(T item);
+    T insert(T item, int id);
     T update(T item);
 }

@@ -35,11 +35,11 @@ public class DepartmentEmployeeLogic {
         return departmentEmployeeDAO.getById(empNo);
     }
         
-    public void addDepartmentEmployee(Map<String, String[]> map) {
+    public void addDepartmentEmployee(Map<String, String[]> map, int id) {
         DepartmentEmployee deptEmp = factory.createFromMap(map);
         cleanDepartmentEmployee(deptEmp);
         validateDepartmentEmployee(deptEmp);
-        departmentEmployeeDAO.insert(deptEmp);
+        departmentEmployeeDAO.insert(deptEmp, id);
     }
     
     public void updateDepartmentEmployee(Map<String, String[]> map) {

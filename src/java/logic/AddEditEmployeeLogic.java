@@ -64,13 +64,13 @@ public class AddEditEmployeeLogic {
     }
     
     public void addEmployee(Map<String, String[]> map) {
-        empLogic.addEmployee(map);
-        String[] s = new String[1];
-        salaryLogic.addSalary(map);
-        titleLogic.addTitle(map);
+        int id = empLogic.getNextAvailableId();
+        empLogic.addEmployee(map, id);
+        salaryLogic.addSalary(map, id);
+        titleLogic.addTitle(map, id);
         //deptLogic.addDepartment(map);
-        deptEmpLogic.addDepartmentEmployee(map);
-        deptMngrLogic.addDepartmentManager(map);
+        deptEmpLogic.addDepartmentEmployee(map, id);
+        deptMngrLogic.addDepartmentManager(map, id);
     }
     
     public void updateEmployee(Map<String, String[]> map) {

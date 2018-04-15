@@ -117,7 +117,7 @@ public class DepartmentDAOImp implements DepartmentDAO {
     }
 
     @Override
-    public Department insert(Department dept) {
+    public Department insert(Department dept, int id) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;

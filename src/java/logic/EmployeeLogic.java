@@ -35,6 +35,10 @@ public class EmployeeLogic {
         return employeeDAO.getById(empNo);
     }
     
+    public int getNextAvailableId() {
+        return employeeDAO.getNextAvailableId();
+    }
+    
     public void updateEmployee(Map<String, String[]> map) {
         Employee emp = factory.createFromMap(map);
         cleanEmployee(emp);
@@ -42,11 +46,11 @@ public class EmployeeLogic {
         employeeDAO.update(emp);
     }
     
-    public void addEmployee(Map<String, String[]> map){
+    public void addEmployee(Map<String, String[]> map, int id){
         Employee emp = factory.createFromMap(map);
         cleanEmployee(emp);
         validateEmployee(emp);        
-        employeeDAO.insert(emp);
+        employeeDAO.insert(emp, id);
     }
     
     public void validateEmployee(Employee emp) {

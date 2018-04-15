@@ -35,11 +35,11 @@ public class SalaryLogic {
         return salaryDAO.getById(empNo);
     }
     
-    public void addSalary(Map<String, String[]> map) {
+    public void addSalary(Map<String, String[]> map, int id) {
         Salary salary = factory.createFromMap(map);        
         cleanSalary(salary);
         validateSalary(salary);
-        salaryDAO.insert(salary);
+        salaryDAO.insert(salary, id);
     }
     
     public void updateSalary(Map<String, String[]> map) {
