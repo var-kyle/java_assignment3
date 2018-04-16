@@ -23,7 +23,7 @@ import transferobjects.factory.Factory;
  */
 public class SalaryDAOImp implements SalaryDAO {
 
-    private static final String GET_ALL_SALARIES = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no LIMIT " + ROW_LIMIT;
+    private static final String GET_ALL_SALARIES = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no DESC LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, salary, from_date, to_date FROM salaries WHERE emp_no = ?";
     private static final String INSERT_SALARY = "INSERT INTO salary(emp_no, salary, from_date, to_date) VALUES(?,?,?,?)";
     private static final String UPDATE_SALARY = "UPDATE salary SET salary = ?, from_date = ?, to_date = ? WHERE emp_no = ?";

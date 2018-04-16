@@ -23,7 +23,7 @@ import transferobjects.factory.Factory;
  */
 public class TitleDAOImp implements TitleDAO {
 
-    private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT " + ROW_LIMIT;
+    private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no DESC LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, title, from_date, to_date FROM titles WHERE emp_no = ?";
     private static final String INSERT_TITLE = "INSERT INTO titles(emp_no, title, from_date, to_date) VALUES(?,?,?,?)";
     private static final String UPDATE_TITLE = "UPDATE titles SET title = ?, from_date = ?, to_date = ? WHERE emp_no = ?";

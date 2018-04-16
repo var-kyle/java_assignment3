@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import transferobjects.Title;
 
 /**
+ * the interface for data access to the title table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public interface TitleDAO extends BasicDAO<Title> {
+    /**
+     * gets the most current row from the title table
+     * @param empNo
+     * @return 
+     */
     Title getById(int empNo);
 }

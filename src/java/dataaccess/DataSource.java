@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.sql.Connection;
@@ -14,8 +9,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 /**
+ * singleton implementation for the connection to the daatbase
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class DataSource {
     private javax.sql.DataSource ds;    
@@ -23,6 +19,9 @@ public class DataSource {
     
     private DataSource(){}
    
+    /**
+     * sets the data source from values found in the context files
+     */
     private void getDataSource(){
         try {
             Context initContext = new InitialContext();
@@ -50,6 +49,10 @@ public class DataSource {
         return conn;
     }    
     
+    /**
+     * returns the connection to the database using lazy loading
+     * @return 
+     */
     public static Connection getConnection(){
         if (singleton == null){
             singleton = new DataSource();

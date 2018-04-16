@@ -174,9 +174,8 @@ public class EmployeeModifyView extends HttpServlet {
             
             out.println("<div class=\"row mt-3 mr-3 ml-3\">");
             out.println("<div class=\"col-sm-12\">");
-            out.println("<div class=\"form-group\">");
+            out.println("<div class=\"form-check\">");out.println("<input type=\"checkbox\" class=\"form-check-input\" id=\"is_manager\"" + (logic.isEmployeeManager(id, dept.getNumber()) ? "selected" : "") + ">");
             out.println("<label for=\"departmentSelector\">Manager?</label>");
-            out.println("<input type=\"checkbox\" class=\"form-check-input\" id=\"is_manager\"" + (logic.isEmployeeManager(id, dept.getNumber()) ? "selected" : "") + ">");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>"); // /row

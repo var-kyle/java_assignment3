@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.AddEditEmployeeLogic;
 import transferobjects.Department;
-import transferobjects.DepartmentEmployee;
-import transferobjects.Employee;
-import transferobjects.Salary;
-import transferobjects.Title;
 
 /**
  *
@@ -166,9 +162,9 @@ public class EmployeeAddView extends HttpServlet {
                         
             out.println("<div class=\"row mt-3 mr-3 ml-3\">");
             out.println("<div class=\"col-sm-12\">");
-            out.println("<div class=\"form-group\">");
-            out.println("<label for=\"departmentSelector\">Manager?</label>");
+            out.println("<div class=\"form-check\">");
             out.println("<input type=\"checkbox\" class=\"form-check-input\" id=\"is_manager\">");
+            out.println("<label for=\"departmentSelector\">Manager?</label>");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>"); // /row

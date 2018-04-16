@@ -1,17 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import transferobjects.Employee;
 
 /**
+ * the interface for data access to the employee table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public interface EmployeeDAO extends BasicDAO<Employee> {
+    /**
+     * gets the specifc row from the employee table
+     * @param empNo
+     * @return 
+     */
     Employee getById(int empNo);
+    /**
+     * gets the next available id from the employee table
+     * @return 
+     */
     int getNextAvailableId();
 }

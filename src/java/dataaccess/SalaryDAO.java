@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import transferobjects.Salary;
 
 /**
+ * the interface for data access to the salary table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public interface SalaryDAO extends BasicDAO<Salary> {
+    /**
+     * gets the most current row from the salary table
+     * @param empNo
+     * @return 
+     */
     Salary getById(int empNo);
 }

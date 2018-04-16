@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.sql.Connection;
@@ -18,11 +13,12 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * the implementation for data access to the department manager table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class DepartmentManagerDAOImp implements DepartmentManagerDAO {
-    private static final String GET_ALL_DEPARTMENT_MANAGERS = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager ORDER BY emp_no LIMIT " + ROW_LIMIT;
+    private static final String GET_ALL_DEPARTMENT_MANAGERS = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager ORDER BY emp_no DESC LIMIT " + ROW_LIMIT;
     private static final String GET_BY_ID = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager WHERE emp_no = ? AND dept_no = ?";
     private static final String INSERT_DEPARTMENT_MANAGER = "INSERT INTO dept_manager(emp_no, dept_no, from_date, to_date) VALUES(?,?,?,?)";
     private static final String UPDATE_DEPARTMENT_MANAGER = "UPDATE dept_manager SET from_date = ?, to_date = ? WHERE emp_no = ? AND dept_no = ?";

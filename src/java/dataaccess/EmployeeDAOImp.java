@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.sql.Connection;
@@ -18,8 +13,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * the implementation for data access to the employee table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class EmployeeDAOImp implements EmployeeDAO {
 
