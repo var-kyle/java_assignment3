@@ -15,8 +15,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * delegate class that handles data access to the salary table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class SalaryLogic {    
     private SalaryDAO salaryDAO = null;
@@ -27,14 +28,28 @@ public class SalaryLogic {
         factory = DTOFactoryCreator.createBuilder(Salary.class);
     }
 
+    /**
+     * gets all salary entries in the salary table
+     * @return 
+     */
     public List<Salary> getAllSalaries() {
         return salaryDAO.getAll();
     }
     
+    /**
+     * gets an employees salary information from the database
+     * @param empNo
+     * @return 
+     */
     public Salary getSalaryById(int empNo) {
         return salaryDAO.getById(empNo);
     }
     
+    /**
+     * inserts a new salary into the database
+     * @param map
+     * @param id 
+     */
     public void addSalary(Map<String, String[]> map, int id) {
         Salary salary = factory.createFromMap(map);        
         cleanSalary(salary);
@@ -42,6 +57,10 @@ public class SalaryLogic {
         salaryDAO.insert(salary, id);
     }
     
+    /**
+     * updates an existing salary in the database
+     * @param map 
+     */
     public void updateSalary(Map<String, String[]> map) {
         Salary salary = factory.createFromMap(map);        
         cleanSalary(salary);
@@ -49,6 +68,10 @@ public class SalaryLogic {
         salaryDAO.update(salary);
     }
     
+    /**
+     * validates salary information before saving it in the database
+     * @param salary 
+     */
     public void validateSalary(Salary salary) {
         Validation.validateInt(salary.getEmployeeNumber(), "Employee Number", Integer.MAX_VALUE, Integer.MIN_VALUE);
         Validation.validateInt(salary.getSalary(), "Salary", Integer.MAX_VALUE, Integer.MIN_VALUE);
@@ -56,6 +79,10 @@ public class SalaryLogic {
         Validation.validateDate(salary.getToDate(), "To Date", false);
     }
     
+    /**
+     * cleans the salary information before validating it
+     * @param salary 
+     */
     public void cleanSalary(Salary salary) {
         if (salary.getFromDate() == null) {
             salary.setFromDate(new Date(System.currentTimeMillis()));

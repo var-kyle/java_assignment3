@@ -14,8 +14,9 @@ import transferobjects.factory.Factory;
 import java.util.Map;
 
 /**
+ * the delegate class to handle data access for departments
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class DepartmentLogic {
     private DepartmentDAO departmentDAO = null;
@@ -26,14 +27,28 @@ public class DepartmentLogic {
         factory = DTOFactoryCreator.createBuilder(Department.class);
     }
 
+    /**
+     * gets a list of all the departments
+     * @return 
+     */
     public List<Department> getAllDepartments() {
         return departmentDAO.getAll();
     }
     
+    /**
+     * gets a department from it's id
+     * @param deptNo
+     * @return 
+     */
     public Department getDepartmentById(String deptNo) {
         return departmentDAO.getById(deptNo);
     }
     
+    /**
+     * inserts a department into the database
+     * @param map
+     * @param id 
+     */
     public void addDepartment(Map<String, String[]> map, int id) {
         Department dept = factory.createFromMap(map);
         cleanDepartment(dept);
@@ -41,6 +56,10 @@ public class DepartmentLogic {
         departmentDAO.insert(dept, id);
     }
     
+    /**
+     * updates an existing department
+     * @param map 
+     */
     public void updateDepartment(Map<String, String[]> map) {
         Department dept = factory.createFromMap(map);
         cleanDepartment(dept);
@@ -48,11 +67,19 @@ public class DepartmentLogic {
         departmentDAO.update(dept);
     }
     
+    /**
+     * validates fields before sending them to the database
+     * @param dept 
+     */
     public void validateDepartment(Department dept) {
         Validation.validateString(dept.getNumber(), "Department Code", 4, false);
         Validation.validateString(dept.getName(), "Department Name", 40, false);
     }    
 
+    /**
+     * cleans the fields before sending them to the database
+     * @param dept 
+     */
     private void cleanDepartment(Department dept) {
         if (dept.getNumber()!= null) {
             dept.setNumber(dept.getNumber().trim());

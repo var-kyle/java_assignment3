@@ -8,8 +8,9 @@ package transferobjects;
 import java.util.Objects;
 
 /**
+ * department transfer object. looks like the department table
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class Department {
     private String name;

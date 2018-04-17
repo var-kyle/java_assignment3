@@ -18,8 +18,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * the data access implementation for the salary table
  *
- * @author kylem
+ * @author kyle, ketih
  */
 public class SalaryDAOImp implements SalaryDAO {
 

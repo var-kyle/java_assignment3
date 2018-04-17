@@ -9,8 +9,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
+ * the title transfer object that maps to the title table
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class Title {
     private int employeeNumber;

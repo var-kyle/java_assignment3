@@ -9,8 +9,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
+ * the salary transfer object that maps to the salary table
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class Salary {
     private int employeeNumber, salary;

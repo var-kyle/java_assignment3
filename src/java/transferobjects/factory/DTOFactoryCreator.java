@@ -9,8 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author kylem
+ * makes creating factories a lot easier
+ * 
+ * @author not me
  */
 public final class DTOFactoryCreator {
     private static final String PACKAGE = "transferobjects.factory.";
@@ -19,6 +20,12 @@ public final class DTOFactoryCreator {
     private DTOFactoryCreator() {
     }
     
+    /**
+     * gets the corresponding factory of the type provided, using magic
+     * @param <T>
+     * @param factoryName
+     * @return 
+     */
     @SuppressWarnings("unchecked")
     public static <T> Factory<T> getFactory(String factoryName) {
         Factory<T> factory = null;
@@ -30,6 +37,12 @@ public final class DTOFactoryCreator {
         return factory;
     }
 
+    /**
+     * gets the corresponding builder of the type provided.
+     * @param <T>
+     * @param type
+     * @return 
+     */
     public static <T> Factory<T> createBuilder(Class<T> type) {
         return getFactory(type.getSimpleName());
     }

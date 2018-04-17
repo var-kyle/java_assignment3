@@ -15,8 +15,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * delegate class that handles data access to the title table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class TitleLogic {
     private TitleDAO titleDAO = null;
@@ -27,14 +28,28 @@ public class TitleLogic {
         factory = DTOFactoryCreator.createBuilder(Title.class);
     }
 
+    /**
+     * gets all the titles from the database
+     * @return 
+     */
     public List<Title> getAllTitles() {
         return titleDAO.getAll();
     }
     
+    /**
+     * gets an employees title
+     * @param empNo
+     * @return 
+     */
     public Title getTitleById(int empNo) {
         return titleDAO.getById(empNo);
     }
     
+    /**
+     * inserts a new title for an employee into the database
+     * @param map
+     * @param id 
+     */
     public void addTitle(Map<String, String[]> map, int id) {
         Title title = factory.createFromMap(map);        
         cleanTitle(title);
@@ -42,6 +57,10 @@ public class TitleLogic {
         titleDAO.insert(title, id);
     }
     
+    /**
+     * updates an existing title for an employee
+     * @param map 
+     */
     public void updateTitle(Map<String, String[]> map) {
         Title title = factory.createFromMap(map);        
         cleanTitle(title);
@@ -49,6 +68,10 @@ public class TitleLogic {
         titleDAO.update(title);
     }
     
+    /**
+     * validates title information before saving it
+     * @param title 
+     */
     public void validateTitle(Title title) {
         Validation.validateInt(title.getEmployeeNumber(), "Employee Number", Integer.MAX_VALUE, Integer.MIN_VALUE);
         Validation.validateString(title.getTitle(), "Title", 50, false);
@@ -56,6 +79,10 @@ public class TitleLogic {
         Validation.validateDate(title.getToDate(), "To Date", true);
     }
     
+    /**
+     * cleans title information before validating it
+     * @param title 
+     */
     public void cleanTitle(Title title) {
         if (title.getTitle()!= null) {
             title.setTitle(title.getTitle().trim());

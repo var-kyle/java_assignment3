@@ -8,11 +8,19 @@ package logic;
 import java.sql.Date;
 
 /**
+ * a common class that holds validation for all the logic classes
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class Validation {
 
+    /**
+     * makes sure the string to be saved, can be saved
+     * @param value
+     * @param fieldName
+     * @param maxLength
+     * @param isNullAllowed 
+     */
     public static void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate
@@ -27,6 +35,13 @@ public class Validation {
         }
     }
 
+    /**
+     * makes sure the integer to save, can be saved
+     * @param value
+     * @param fieldName
+     * @param maxValue
+     * @param minValue 
+     */
     public static void validateInt(int value, String fieldName, int maxValue, int minValue) {
         if (value > maxValue) {
             throw new IllegalArgumentException(String.format("%s cannot exceed %d", fieldName, maxValue));
@@ -37,6 +52,12 @@ public class Validation {
         }
     }
 
+    /**
+     * makes sure the date is a valid date before saving it in the database
+     * @param value
+     * @param fieldName
+     * @param isNullAllowed 
+     */
     public static void validateDate(Date value, String fieldName, boolean isNullAllowed) {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate
@@ -48,6 +69,13 @@ public class Validation {
         }
     }
     
+    /**
+     * specific to an employee, but used to make sure the gender is either M or F
+     * @param value
+     * @param fieldName
+     * @param maxLength
+     * @param isAllowed 
+     */
     public static void validateGender(String value, String fieldName, int maxLength, boolean isAllowed) {
         validateString(value, fieldName, maxLength, isAllowed);
         

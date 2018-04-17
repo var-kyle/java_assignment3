@@ -15,8 +15,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * the delegate class to handle data access to department manager table
  *
- * @author kylem
+ * @author kyle, alex
  */
 public class DepartmentManagerLogic {
     private DepartmentManagerDAO departmentManagerDAO = null;
@@ -27,14 +28,29 @@ public class DepartmentManagerLogic {
         factory = DTOFactoryCreator.createBuilder(DepartmentManager.class);
     }
 
+    /**
+     * gets all the department manager relations
+     * @return 
+     */
     public List<DepartmentManager> getAllDepartmentManagers() {
         return departmentManagerDAO.getAll();
     }
     
+    /**
+     * gets a specific relation by employee and department
+     * @param empNo
+     * @param deptNo
+     * @return 
+     */
     public DepartmentManager getDepartmentManagerById(int empNo, String deptNo) {
         return departmentManagerDAO.getById(empNo, deptNo);
     }
         
+    /**
+     * inserts a new department manager relation
+     * @param map
+     * @param id 
+     */
     public void addDepartmentManager(Map<String, String[]> map, int id) {
         DepartmentManager deptMngr = factory.createFromMap(map);
         cleanDepartmentEmployee(deptMngr);
@@ -42,6 +58,10 @@ public class DepartmentManagerLogic {
         departmentManagerDAO.insert(deptMngr, id);
     }
     
+    /**
+     * updates an existing department manager relation
+     * @param map 
+     */
     public void updateDepartmentManager(Map<String, String[]> map) {
         DepartmentManager deptMngr = factory.createFromMap(map);
         cleanDepartmentEmployee(deptMngr);
@@ -49,6 +69,10 @@ public class DepartmentManagerLogic {
         departmentManagerDAO.update(deptMngr);
     }
     
+    /**
+     * validates fields before sending them to the database
+     * @param deptMngr 
+     */
     public void validateDepartmentEmployee(DepartmentManager deptMngr) {
         Validation.validateInt(deptMngr.getEmployeeNumber(), "Employee Number", Integer.MAX_VALUE, Integer.MIN_VALUE);
         Validation.validateString(deptMngr.getDepartmentNumber(), "Department Number", 4, false);
@@ -56,6 +80,10 @@ public class DepartmentManagerLogic {
         Validation.validateDate(deptMngr.getToDate(), "To Date", false);
     }    
 
+    /**
+     * cleans fields before validating them
+     * @param deptMngr 
+     */
     private void cleanDepartmentEmployee(DepartmentManager deptMngr) {        
         if (deptMngr.getDepartmentNumber()!= null) {
             deptMngr.setDepartmentNumber(deptMngr.getDepartmentNumber().trim());

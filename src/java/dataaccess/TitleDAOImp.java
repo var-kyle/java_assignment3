@@ -18,8 +18,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * the data access implementation for the title table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class TitleDAOImp implements TitleDAO {
 

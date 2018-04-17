@@ -15,8 +15,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * the delegate class for handling the employee/department relation
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class DepartmentEmployeeLogic {
     private DepartmentEmployeeDAO departmentEmployeeDAO = null;
@@ -27,14 +28,28 @@ public class DepartmentEmployeeLogic {
         factory = DTOFactoryCreator.createBuilder(DepartmentEmployee.class);
     }
 
+    /**
+     * gets all employee/department relations
+     * @return 
+     */
     public List<DepartmentEmployee> getAllDepartmentEmployees() {
         return departmentEmployeeDAO.getAll();
     }
     
+    /**
+     * gets a specific relation based on employee id
+     * @param empNo
+     * @return 
+     */
     public DepartmentEmployee getDepartmentEmployeeById(int empNo) {
         return departmentEmployeeDAO.getById(empNo);
     }
         
+    /**
+     * inserts the department/employee relation to the database
+     * @param map
+     * @param id 
+     */
     public void addDepartmentEmployee(Map<String, String[]> map, int id) {
         DepartmentEmployee deptEmp = factory.createFromMap(map);
         cleanDepartmentEmployee(deptEmp);
@@ -42,6 +57,10 @@ public class DepartmentEmployeeLogic {
         departmentEmployeeDAO.insert(deptEmp, id);
     }
     
+    /**
+     * updates an existing relation
+     * @param map 
+     */
     public void updateDepartmentEmployee(Map<String, String[]> map) {
         DepartmentEmployee deptEmp = factory.createFromMap(map);
         cleanDepartmentEmployee(deptEmp);
@@ -49,6 +68,10 @@ public class DepartmentEmployeeLogic {
         departmentEmployeeDAO.update(deptEmp);
     }
     
+    /**
+     * validates the fields found in the employee department table before adding them to the table
+     * @param deptEmp 
+     */
     public void validateDepartmentEmployee(DepartmentEmployee deptEmp) {
         Validation.validateInt(deptEmp.getEmployeeNumber(), "Employee Number", Integer.MAX_VALUE, Integer.MIN_VALUE);
         Validation.validateString(deptEmp.getDepartmentNumber(), "Department Number", 4, false);
@@ -56,6 +79,10 @@ public class DepartmentEmployeeLogic {
         Validation.validateDate(deptEmp.getToDate(), "To Date", false);
     }    
 
+    /**
+     * cleans the fields before sending them to the database
+     * @param deptEmp 
+     */
     private void cleanDepartmentEmployee(DepartmentEmployee deptEmp) {        
         if (deptEmp.getDepartmentNumber()!= null) {
             deptEmp.setDepartmentNumber(deptEmp.getDepartmentNumber().trim());

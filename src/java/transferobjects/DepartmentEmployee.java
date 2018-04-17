@@ -9,8 +9,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
+ * the department employee transfer object that maps to the department employee table
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class DepartmentEmployee {
     private int employeeNumber;

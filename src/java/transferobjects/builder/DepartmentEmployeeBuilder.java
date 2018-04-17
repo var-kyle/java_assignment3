@@ -12,8 +12,9 @@ import java.util.Map;
 import transferobjects.DepartmentEmployee;
 
 /**
+ * class that builds a department employee object
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class DepartmentEmployeeBuilder {
     private static final String COL_EMP_NO = "emp_no";
@@ -24,47 +25,95 @@ public class DepartmentEmployeeBuilder {
     private static final String MAP_TO_DATE = "dept_to_date";
     private DepartmentEmployee deptEmp = new DepartmentEmployee();
     
+    /**
+     * sets the employee number from a result set
+     * @param rs
+     * @return
+     * @throws SQLException 
+     */
     public DepartmentEmployeeBuilder setEmployeeNumber(ResultSet rs) throws SQLException{
         deptEmp.setEmployeeNumber(rs.getInt(COL_EMP_NO));
         return this;
     }
     
+    /**
+     * sets the department number from a result set
+     * @param rs
+     * @return
+     * @throws SQLException 
+     */
     public DepartmentEmployeeBuilder setDepartmentNumber(ResultSet rs) throws SQLException{
         deptEmp.setDepartmentNumber(rs.getString(COL_DEPT_NO));        
         return this;
     }
     
+    /**
+     * sets the from date from a result set
+     * @param rs
+     * @return
+     * @throws SQLException 
+     */
     public DepartmentEmployeeBuilder setFromDate(ResultSet rs) throws SQLException {
         deptEmp.setFromDate(rs.getDate(COL_FROM_DATE));
         return this;
     }
     
+    /**
+     * sets the to date from a result set
+     * @param rs
+     * @return
+     * @throws SQLException 
+     */
     public DepartmentEmployeeBuilder setToDate(ResultSet rs) throws SQLException {
         deptEmp.setToDate(rs.getDate(COL_TO_DATE));
         return this;
     }
     
+    /**
+     * sets the employee number from a map
+     * @param map
+     * @return 
+     */
     public DepartmentEmployeeBuilder setEmployeeNumber(Map<String, String[]> map) {
         if (map.containsKey(COL_EMP_NO))
             deptEmp.setEmployeeNumber(Integer.parseInt(map.get(COL_EMP_NO)[0]));
         return this;
     }
     
+    /**
+     * sets the department number from a map
+     * @param map
+     * @return 
+     */
     public DepartmentEmployeeBuilder setDepartmentNumber(Map<String, String[]> map) {
         deptEmp.setDepartmentNumber(map.get(COL_DEPT_NO)[0]);        
         return this;
     }
     
+    /**
+     * sets the from date from a map
+     * @param map
+     * @return 
+     */
     public DepartmentEmployeeBuilder setFromDate(Map<String, String[]> map) {
         deptEmp.setFromDate(Date.valueOf(map.get(MAP_FROM_DATE)[0]));
         return this;
     }
     
+    /**
+     * sets the to date from a map
+     * @param map
+     * @return 
+     */
     public DepartmentEmployeeBuilder setToDate(Map<String, String[]> map) {
         deptEmp.setToDate(Date.valueOf(map.get(MAP_TO_DATE)[0]));
         return this;
     }
     
+    /**
+     * gets the built object
+     * @return 
+     */
     public DepartmentEmployee get() {
         return deptEmp;
     }

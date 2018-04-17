@@ -15,8 +15,9 @@ import transferobjects.factory.DTOFactoryCreator;
 import transferobjects.factory.Factory;
 
 /**
+ * delegate class to handle data access to the employee table
  *
- * @author kylem
+ * @author kyle, keith
  */
 public class EmployeeLogic {
     private EmployeeDAO employeeDAO = null;
@@ -27,18 +28,35 @@ public class EmployeeLogic {
         factory = DTOFactoryCreator.createBuilder(Employee.class);
     }
 
+    /**
+     * gets a list of all employees
+     * @return 
+     */
     public List<Employee> getAllEmployees() {
         return employeeDAO.getAll();
     }
     
+    /**
+     * gets a specific employee by employee number
+     * @param empNo
+     * @return 
+     */
     public Employee getEmployeeById(int empNo) {
         return employeeDAO.getById(empNo);
     }
     
+    /**
+     * gets the next free id from the database
+     * @return 
+     */
     public int getNextAvailableId() {
         return employeeDAO.getNextAvailableId();
     }
     
+    /**
+     * updates an existing employee in the database
+     * @param map 
+     */
     public void updateEmployee(Map<String, String[]> map) {
         Employee emp = factory.createFromMap(map);
         cleanEmployee(emp);
@@ -46,6 +64,11 @@ public class EmployeeLogic {
         employeeDAO.update(emp);
     }
     
+    /**
+     * inserts a new employee into the database
+     * @param map
+     * @param id 
+     */
     public void addEmployee(Map<String, String[]> map, int id){
         Employee emp = factory.createFromMap(map);
         cleanEmployee(emp);
@@ -53,6 +76,10 @@ public class EmployeeLogic {
         employeeDAO.insert(emp, id);
     }
     
+    /**
+     * validates employee information before saving it in the database
+     * @param emp 
+     */
     public void validateEmployee(Employee emp) {
         Validation.validateInt(emp.getEmployeeNumber(), "Employee Number", Integer.MAX_VALUE, Integer.MIN_VALUE);
         Validation.validateString(emp.getFirstName(), "First Name", 14, false);
@@ -62,6 +89,10 @@ public class EmployeeLogic {
         Validation.validateDate(emp.getHireDate(), "Hire Date", false);
     }    
 
+    /**
+     * cleans employee information before validating it
+     * @param emp 
+     */
     private void cleanEmployee(Employee emp) {
         if (emp.getFirstName()!= null) {
             emp.setFirstName(emp.getFirstName().trim());

@@ -14,14 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * abstract implementation of the factory interface
  *
- * @author kyle
+ * @author kyle, keith
  */
 public abstract class AbstractFactory <T> implements Factory<T> {
 
     @Override
     public abstract T createFromResultSet(ResultSet rs);
-
+    
     @Override
     public List<T> createListFromResultSet(ResultSet rs){
         List<T> results = new LinkedList<>();

@@ -10,11 +10,29 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * contains methods that all factories will use
  *
- * @author kyle
+ * @author kyle, keith
  */
 public interface Factory<T> {
+    /**
+     * creates an transfer object from a result set
+     * @param rs
+     * @return 
+     */
     T createFromResultSet(ResultSet rs);
+    
+    /**
+     * creates a list of transfer objects from a result set
+     * @param rs
+     * @return 
+     */
     List<T> createListFromResultSet(ResultSet rs);
+    
+    /**
+     * creates a transfer object from a parameter map
+     * @param map
+     * @return 
+     */
     T createFromMap(Map<String, String[]> map);
 }

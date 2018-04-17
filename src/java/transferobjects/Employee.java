@@ -8,8 +8,9 @@ package transferobjects;
 import java.sql.Date;
 
 /**
+ * the employee transfer object that maps to the employee table
  *
- * @author kyle
+ * @author kyle, keith
  */
 public class Employee {
     private int employeeNumber;
