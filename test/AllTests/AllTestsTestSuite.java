@@ -15,7 +15,7 @@ import hthurow.tomcatjndi.TomcatJNDI;
 import java.io.File;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({})
+@Suite.SuiteClasses({SalaryDAOTest.class})
 public class AllTestsTestSuite {
     
     private static TomcatJNDI tomcatJNDI;
