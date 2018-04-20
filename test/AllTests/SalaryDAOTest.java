@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AllTests;
 
 import dataaccess.SalaryDAO;
@@ -15,10 +10,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import transferobjects.Salary;
 
-/**
- *
- * @author kyle
- */
 public class SalaryDAOTest {
 
     private SalaryDAO dao;
@@ -36,7 +27,16 @@ public class SalaryDAOTest {
     @Test
     public void getAllTest() {
         List<Salary> salaries = dao.getAll();
+        
         assertNotNull(salaries);
         assertTrue(salaries.size() > 0);
+    }
+    
+    @Test
+    public void getByIdTest() {
+        int id = dao.getAll().get(1).getEmployeeNumber();
+        Salary salary = dao.getById(id);
+        
+        assertNotNull(salary);
     }
 }

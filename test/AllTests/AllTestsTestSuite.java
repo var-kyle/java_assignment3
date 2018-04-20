@@ -5,9 +5,7 @@
  */
 package AllTests;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -15,7 +13,7 @@ import hthurow.tomcatjndi.TomcatJNDI;
 import java.io.File;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({SalaryDAOTest.class})
+@Suite.SuiteClasses({DepartmentDAOTest.class, DepartmentEmployeeDAOTest.class, DepartmentManagerDAOTest.class, EmployeeDAOTest.class, SalaryDAOTest.class, TitleDAOTest.class, AddEmployeeTest.class, UpdateEmployeeTest.class})
 public class AllTestsTestSuite {
     
     private static TomcatJNDI tomcatJNDI;
